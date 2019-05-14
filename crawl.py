@@ -211,24 +211,25 @@ class Spider():
         csvAppender = CsvAppender(write_html_to)
         do_save_state = 0
         initial = True
+        kb_interrupt = False
         # The main loop. Create a LinkParser and get all the links on the page.
         # Also search the page for the word or string
         # In our getLinks function we return the web page
         # (this is useful for searching for the word)
         # and we return a set of links from that web page
         # (this is useful for where to go next)
-        while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != []:
+        while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != [] and not kb_interrupt:
             # Start from the beginning of our collection of pages to visit:
             url = self.pagesToVisit[0]
             self.pagesToVisit = self.pagesToVisit[1:]
             do_save_state = (do_save_state + 1) % 50
             print_string = Spider.animate_work()
+            cols, lines = shutil.get_terminal_size(fallback=(80, 24))
             if (do_save_state == 0):
                 self.saveSate()
-            if (not url in self.pagesVisited or initial):
+            if (not url in self.pagesVisited or initial or not kb_interrupt):
                 time.sleep(self.wait_between)
                 try:
-                    cols, lines = shutil.get_terminal_size(fallback=(80, 24))
                     print_string += " " + str(len(self.pagesVisited)) + ' Visiting: ' + url #17
                     if len(print_string) + 22 >= cols:
                         print_string = print_string[:cols-22]
@@ -253,7 +254,7 @@ class Spider():
                     # Add the pages that we should visit next to the end of our collection
                     # of pages to visit:
                     random.shuffle(links)
-                    links = links[:10]
+                    links = links[:2]
                     self.pagesToVisit = self.pagesToVisit + links
                     random.shuffle(self.pagesToVisit)
                     self.pagesToVisit = self.pagesToVisit[:100]
@@ -266,11 +267,23 @@ class Spider():
                     if (len_e_string < 0):
                         len_e_string = 0
                     print(e_string + print_string[len_visit_string:-len_e_string])
+                except KeyboardInterrupt as ki:
+                    print((str(ki) + ' > Stop crawling').ljust(cols))
+                    kb_interrupt = True
+
             print(print_string, end="\r", flush=True)
 
     
 
-spider = Spider(wait_between=.001, resume=True, write_html_to='Random_Wiki_Pages.csv')
+spider = Spider(wait_between=.001, write_html_to='Random_Wiki_Pages.csv')
+spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
+spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
+spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
+spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
