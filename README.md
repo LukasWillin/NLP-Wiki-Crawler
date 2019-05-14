@@ -7,11 +7,11 @@ Der Crawler entfernt Zahlen und einige Sonderzeichen, sowie Begriffe,
 die nicht zum eigentlichen Artikelinhalt gehören.
 
 Ihr könnt mit der Funktion Spider#append eigene Einstiegs-Urls angeben.
-mit Spider#crawl startet ihr den Vorgang.
+Mit Spider#crawl startet ihr den Vorgang.
 Beim Contructor Spider den Parameter resume=True setzen, um mit der
 letzten abgelegten URL weiter zu machen.
  
-Zum abbrechen einfach jederzeit Ctrl+C drücken (Die Resultate werden
+Zum Abbrechen einfach jederzeit Ctrl+C drücken (Die Resultate werden
 fortlaufend abgelegt, gehen also nicht verloren).
 
 In der Konsole das Python-Script starten mit
@@ -20,4 +20,4 @@ In der Konsole das Python-Script starten mit
 
 > python ./crawl.py
 
-(allfällig module mit conda install nachinstallieren)
+(allfällig Module mit `conda install` nachinstallieren)
