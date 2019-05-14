@@ -262,6 +262,7 @@ class Spider():
 spider = Spider(wait_between=.001, resume=True, write_html_to='Random_Wiki_Pages.csv')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://da.wikipedia.org/wiki/Forside')
 spider.appendUrl('https://bs.wikipedia.org/wiki/Po%C4%8Detna_strana')
 spider.appendUrl('https://frr.wikipedia.org/wiki/National_Diet_Library')
