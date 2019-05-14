@@ -15,6 +15,7 @@ from urllib.request import urlopen
 from urllib import parse
 from urllib import error
 from contextlib2 import closing
+import random
 import pandas
 import shutil
 import pickle
@@ -233,7 +234,7 @@ class Spider():
                         print_string = print_string[:cols-22]
                     parser = LinkParser()
                     innerText, links = parser.getLinks(url)
-                    links = list([l for l in links if Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])
+                    links = list([l for l in links if (not l in self.pagesVisited) and Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])[:10]
                     # append html to file
                     if (not initial):
                         appended = csvAppender.append(url, innerText)
@@ -251,7 +252,10 @@ class Spider():
                     
                     # Add the pages that we should visit next to the end of our collection
                     # of pages to visit:
+
                     self.pagesToVisit = self.pagesToVisit + links
+                    random.shuffle(self.pagesToVisit)
+                    self.pagesToVisit = self.pagesToVisit[:100]
                     self.pagesVisited.append(url)
                 except error.HTTPError as e:
                     print(e)
@@ -261,8 +265,10 @@ class Spider():
 
 spider = Spider(wait_between=.001, resume=True, write_html_to='Random_Wiki_Pages.csv')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
+spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://da.wikipedia.org/wiki/Forside')
+spider.appendUrl('https://es.wikipedia.org/wiki/Wikipedia:Portada')
 spider.appendUrl('https://bs.wikipedia.org/wiki/Po%C4%8Detna_strana')
 spider.appendUrl('https://frr.wikipedia.org/wiki/National_Diet_Library')
 spider.appendUrl('https://af.wikipedia.org/wiki/Tuisblad')
