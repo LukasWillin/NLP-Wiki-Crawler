@@ -17,6 +17,7 @@ fortlaufend abgelegt, gehen also nicht verloren).
 In der Konsole das Python-Script starten mit
 
 > conda activate base
+
 > python ./crawl.py
 
 (allfällig module mit conda install nachinstallieren)
