@@ -1,7 +1,7 @@
 # NLP-Wiki-Crawler
 Ich habe für mehr Testdaten einen Crawler geschrieben, der Wikipedia Pages abgrast und sich ein csv anlegt mit `language;url;text` (Wobei language = 'G' , 'E' oder 'X').
 
-Der Crawler besucht nur Seiten, die er nicht bereits besucht hat. <br>
+Der Crawler besucht nur Seiten, die er nicht bereits besucht hat, bzw. im angegebenen csv bereits abgelegt wurden. <br>
 Der Crawler entfernt Zahlen und einige Sonderzeichen, sowie Begriffe, die nicht zum eigentlichen Artikelinhalt gehören.
 
 Ihr könnt mit der Funktion `Spider#append` eigene Einstiegs-Urls angeben.
