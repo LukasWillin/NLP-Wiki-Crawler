@@ -65,7 +65,7 @@ class CsvAppender:
     def __init__(self, target_file):
         self.target_file = target_file
 
-    def append(self, url, html):
+    def getLang(url):
         lang = None
         if (CsvAppender.re_de.search(url) is not None):
             lang = 'G'
@@ -73,7 +73,13 @@ class CsvAppender:
             lang = 'E'
         elif (CsvAppender.re_x.search(url) is not None):
             lang = 'X'
-        else:
+        
+        return lang
+
+    def append(self, url, html):
+        lang = CsvAppender.getLang(url)
+
+        if (lang is None):
             return False
 
         html = ' '.join(Excl.stripHtml(html)[:6000].split())
@@ -167,25 +173,63 @@ class Spider():
         
         try:
             with open(state_file, 'rb') as file:
-                self.pagesVisited = pickle.load(file)['d']
+                state = pickle.load(file)
+                state = Spider.mapState(state, '2')
+                self.pagesVisited = state['d']['pv']
+                if (resume):
+                    self.pagesToVisit = state['d']['tv']
                 file.close()
         except:
             print('Did not load state from: ', state_file)
         try:
             csv = pandas.read_csv(self.write_to, sep=';', encoding='utf-8')
             self.pagesVisited = list(csv['url'])
-            self.pagesToVisit.append(self.pagesVisited[-1:][0])
+            if (resume):
+                self.pagesToVisit.append(self.pagesVisited[-1:][0])
         except IOError as e:
             print('A csv has not yet been created. Did not load visited pages from: ', self.write_to, e)
         print('Crawler visited ', len(self.pagesVisited), 'pages')
         
+    def mapState(src, targetVersion):
+        srcVersion = src['v']
+        pagesVisited = []
+        pagesToVisit = []
 
-    def saveSate(self):
+        if (srcVersion is targetVersion):
+            return src
+
+        if (srcVersion is '1'):
+            pagesVisited = src['d']
+        if (srcVersion is '2'):
+            pagesVisited = src['d']['pv']
+            pagesToVisit = src['d']['tv']
+        
+        if (targetVersion is '1'):
+            return {
+                'v': '1',
+                'd': pagesVisited
+            }
+        if (targetVersion is '2'):
+            return {
+                'v': '2',
+                'd': {
+                    'pv': pagesVisited,
+                    'tv': pagesToVisit
+                }
+            }
+        
+        return src
+        
+
+    def saveState(self):
         try:
             with open(self.state_file, 'wb') as file:
                 pickle.dump({
-                    'v': '1',
-                    'd': self.pagesVisited
+                    'v': '2',
+                    'd': {
+                        'pv': self.pagesVisited,
+                        'tv': self.pagesToVisit
+                    }
                 }, file)
                 file.close()
         except:
@@ -226,7 +270,7 @@ class Spider():
             print_string = Spider.animate_work()
             cols, lines = shutil.get_terminal_size(fallback=(80, 24))
             if (do_save_state == 0):
-                self.saveSate()
+                self.saveState()
             if (not url in self.pagesVisited or initial or not kb_interrupt):
                 time.sleep(self.wait_between)
                 try:
@@ -237,7 +281,7 @@ class Spider():
                     innerText, links = parser.getLinks(url)
                     links = list([l for l in links if (not l in self.pagesVisited) and Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])
                     # append html to file
-                    if (not initial and not url in self.pagesVisited):
+                    if (not initial and not url in self.pagesVisited and not url is None):
                         appended = csvAppender.append(url, innerText)
 
                         if appended:
@@ -254,7 +298,11 @@ class Spider():
                     # Add the pages that we should visit next to the end of our collection
                     # of pages to visit:
                     random.shuffle(links)
-                    links = links[:2]
+                    weight = 2
+                    lang = CsvAppender.getLang(url)
+                    if (lang is 'G' or lang is 'E'):
+                        weight = 3
+                    links = links[:weight]
                     self.pagesToVisit = self.pagesToVisit + links
                     random.shuffle(self.pagesToVisit)
                     self.pagesToVisit = self.pagesToVisit[:100]
@@ -266,16 +314,25 @@ class Spider():
                     len_e_string -= len_visit_string
                     if (len_e_string < 0):
                         len_e_string = 0
-                    print_string = e_string + print_string[len_visit_string:-len_e_string]
+                    print_string = e_string + print_string[len_visit_string:-len_e_string] + '\n'
+                except UnicodeEncodeError as ue:
+                    e_string = str(ue)
+                    len_e_string = len(e_string)
+                    len_visit_string = len("/ " + str(len(self.pagesVisited)) + ' Visiting:')
+                    len_e_string -= len_visit_string
+                    if (len_e_string < 0):
+                        len_e_string = 0
+                    print_string = e_string + print_string[len_visit_string:-len_e_string] + '\n'
                 except KeyboardInterrupt as ki:
-                    print_string = (str(ki) + ' > Stop crawling').ljust(cols)
+                    print_string = (str(ki) + ' > Stop crawling & save state').ljust(cols)
                     kb_interrupt = True
+                    self.saveState()
 
             print(print_string, end="\r", flush=True)
 
     
 
-spider = Spider(wait_between=.001, write_html_to='Random_Wiki_Pages.csv')
+spider = Spider(wait_between=.001, resume=True, write_html_to='Random_Wiki_Pages.csv')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
@@ -285,9 +342,9 @@ spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
+spider.appendUrl('https://de.wikipedia.org/wiki/Heinrich_I._(Ostfrankenreich)')
 spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
+spider.appendUrl('https://de.wikipedia.org/wiki/Heinrich_I._(Ostfrankenreich)')
 spider.appendUrl('https://da.wikipedia.org/wiki/Forside')
 spider.appendUrl('https://es.wikipedia.org/wiki/Wikipedia:Portada')
 spider.appendUrl('https://bs.wikipedia.org/wiki/Po%C4%8Detna_strana')
