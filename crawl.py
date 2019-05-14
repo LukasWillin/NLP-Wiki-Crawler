@@ -234,7 +234,7 @@ class Spider():
                         print_string = print_string[:cols-22]
                     parser = LinkParser()
                     innerText, links = parser.getLinks(url)
-                    links = list([l for l in links if (not l in self.pagesVisited) and Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])[:10]
+                    links = list([l for l in links if (not l in self.pagesVisited) and Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])
                     # append html to file
                     if (not initial):
                         appended = csvAppender.append(url, innerText)
@@ -252,13 +252,20 @@ class Spider():
                     
                     # Add the pages that we should visit next to the end of our collection
                     # of pages to visit:
-
+                    random.shuffle(links)
+                    links = links[:10]
                     self.pagesToVisit = self.pagesToVisit + links
                     random.shuffle(self.pagesToVisit)
                     self.pagesToVisit = self.pagesToVisit[:100]
                     self.pagesVisited.append(url)
                 except error.HTTPError as e:
-                    print(e)
+                    e_string = str(e)
+                    len_e_string = len(e_string)
+                    len_visit_string = len("/ " + str(len(self.pagesVisited)) + ' Visiting:')
+                    len_e_string -= len_visit_string
+                    if (len_e_string < 0):
+                        len_e_string = 0
+                    print(e_string + print_string[len_visit_string:-len_e_string])
             print(print_string, end="\r", flush=True)
 
     
