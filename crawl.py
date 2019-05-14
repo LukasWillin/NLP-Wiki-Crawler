@@ -44,14 +44,19 @@ class Excl:
         Excl.re_exclude = re.compile(excl_string)
 
     def stripHtml(html):
-        return Excl.re_exclude.sub('', Excl.re_rem.sub('', Excl.re_space.sub(' ', html))) # Excl.re_whitespace_trim.sub(' ', Excl.re_whitespace_trim.sub(' ', Excl.re_whitespace_trim.sub(' ', Excl.re_exclude.sub('', Excl.re_rem.sub('', Excl.re_space.sub(' ', html))))))
+        Spider.animate_work(True)
+        html = Excl.re_space.sub(' ', html)
+        Spider.animate_work(True)
+        html = Excl.re_rem.sub('', html)
+        Spider.animate_work(True)
+        return Excl.re_exclude.sub('', html) # Excl.re_whitespace_trim.sub(' ', Excl.re_whitespace_trim.sub(' ', Excl.re_whitespace_trim.sub(' ', Excl.re_exclude.sub('', Excl.re_rem.sub('', Excl.re_space.sub(' ', html))))))
 
 Excl.add_to_exclusion_list(r'autocollapse statecollapsed wikipedia Wikipedia wpsearch QUERY TERMS ShortSearch document documentElement className  document documentElement className replace      s client nojs  s       client js         window RLQwindow RLQ    push function   mw config set   wgCanonicalNamespace      wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories ')
 Excl.add_to_exclusion_list(r'editWarning wgStructuredChangeFilters  mediawiki action edit collapsibleFooter href  site   mediawiki page startup   mediawiki page ready   mediawiki searchSuggest   ext charinsert   ext gadget teahouse   ext gadget ReferenceTooltips   ext gadget watchlist notice   ext gadget DRN wizard   ext gadget charinsert   ext gadget refToolbar   ext gadget extra toolbar buttons   ext gadget switcher   ext centralauth centralautologin   ext CodeMirror   mmv head   mmv bootstrap autostart   ext popups   ext visualEditor desktopArticleTarget init   ext visualEditor targetLoader   ext eventLogging   ext wikimediaEvents   ext navigationTiming   ext uls compactlinks   ext uls interface   ext quicksurveys init   ext centralNotice geoIP   skins vector js  mw loader load RLPAGEMODULES')
-Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl  wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice   wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories   Articles with short description')
-Excl.add_to_exclusion_list(r'wgRelevantPageName wgBackendResponseTime wgHostname wgRelevantArticleId     wgRequestId  XNmm QpAIEIAAA SGIAAABD  wgCSPNonce  wgIsProbablyEditable  wgRelevantPageIsProbablyEditable  wgRestrictionEdit  wgRestrictionMove  wgMediaViewerOnClick  wgMediaViewerEnabledByDefault  wgPopupsReferencePreviews  wgPopupsConflictsWithNavPopupGadget  wgVisualEditor  pageLanguageCode  en  pageLanguageDir  ltr  pageVariantFallbacks  en  wgMFDisplayWikibaseDescriptions  search  nearby    tagline   wgRelatedArticles  wgRelatedArticlesUseCirrusSearch  wgRelatedArticlesOnlyUseCirrusSearch  wgWMESchemaEditAttemptStepOversample  wgPoweredByHHVM  wgULSCurrentAutonym  English  wgNoticeProject   wgCentralNoticeCookiesToDelete  wgCentralNoticeCategoriesUsingLegacy  Fundraising  fundraising  wgWikibaseItemId  Q     wgCentralAuthMobileDomain  wgEditSubmitButtonLabelPublish    state   styles    globalCssJs user styles    globalCssJs styles    styles   noscript   user styles    globalCssJs user    globalCssJs    user   user options   user tokens  loading  cite styles    math styles    legacy shared    legacy commonPrint    toc styles   wikibase      noscript    interlanguage    wikimediaBadges    d styles    skinning     styles     implement user tokens tffind  jQuery require module  displaystyle X displaystyle  alpha Leftrightarrow wgPageParseReport limitreport cputime  walltime  ppvisitednodes  limit  ppgeneratednodes  limit  postexpandincludesize  limit  templateargumentsize limit  expansiondepth  limit  expensivefunctioncount  limit unstrip depth  limit  unstrip size  limit  entityaccesscount  limit timingprofile   Templat References    total   Templat Cite journal   Templat Main other scribunto limitreport timeusage   limit   limitreport memusage   limit  cachereport origin timestamp  ttl  transientcontent      context  https  schema  type  Article  name  Nilai url  https  wiki Nilai sameAs  http  www wikidata  entity  mainEntity  nomin  user tokens  editToken     patrolToken     watchToken     csrfToken        cite ux enhancements  math scripts         toc')
-Excl.add_to_exclusion_list(r'parser output tmulti thumbinner display flex flex direction column  parser output tmulti trow display flex flex direction row clear left flex wrap wrap width  box sizing border box  parser output tmulti tsingle margin px float left  parser output tmulti theader clear both font weight bold text align center align self center background color transparent width  parser output tmulti thumbcaption text align left background color transparent  parser output tmulti text align left text align left  parser output tmulti text align right text align right  parser output tmulti text align center text align center all and max width px parser output tmulti thumbinner width  important box sizing border box max width none important align items center  parser output tmulti trow justify content center  parser output tmulti tsingle float none important max width  important box sizing border box text align center  parser output tmulti thumbcaption text align center')
-Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort XNjswwpAIEIAAIU iM AAACN    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt       startUp flaggedRevs advanced   Collider Detector at Fermilab   XNnpDgpAMFQAAJ dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                     flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
+Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl  wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice UTC  wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories   Articles with short description')
+Excl.add_to_exclusion_list(r'wgRelevantPageName wgBackendResponseTime wgHostname wgRelevantArticleId wgSiteNoticeId dismissableSiteNotice cqd ng    wgRequestId  XNmm QpAIEIAAA SGIAAABD  wgCSPNonce  wgIsProbablyEditable  wgRelevantPageIsProbablyEditable  wgRestrictionEdit  wgRestrictionMove  wgMediaViewerOnClick  wgMediaViewerEnabledByDefault  wgPopupsReferencePreviews  wgPopupsConflictsWithNavPopupGadget  wgVisualEditor  pageLanguageCode  en  pageLanguageDir  ltr  pageVariantFallbacks  en  wgMFDisplayWikibaseDescriptions  search  nearby    tagline   wgRelatedArticles  wgRelatedArticlesUseCirrusSearch  wgRelatedArticlesOnlyUseCirrusSearch  wgWMESchemaEditAttemptStepOversample  wgPoweredByHHVM  wgULSCurrentAutonym  English  wgNoticeProject   wgCentralNoticeCookiesToDelete  wgCentralNoticeCategoriesUsingLegacy  Fundraising  fundraising  wgWikibaseItemId  Q     wgCentralAuthMobileDomain  wgEditSubmitButtonLabelPublish    state   styles    globalCssJs user styles    globalCssJs styles    styles   noscript   user styles    globalCssJs user    globalCssJs    user   user options   user tokens  loading  cite styles    math styles    legacy shared    legacy commonPrint    toc styles   wikibase      noscript    interlanguage    wikimediaBadges    d styles    skinning     styles     implement user tokens tffind  jQuery require module  displaystyle X displaystyle  alpha Leftrightarrow wgPageParseReport limitreport cputime  walltime  ppvisitednodes  limit  ppgeneratednodes  limit  postexpandincludesize  limit  templateargumentsize limit  expansiondepth  limit  expensivefunctioncount  limit unstrip depth  limit  unstrip size  limit  entityaccesscount  limit timingprofile   Templat References    total   Templat Cite journal   Templat Main other scribunto limitreport timeusage   limit   limitreport memusage   limit  cachereport origin timestamp  ttl  transientcontent      context  https  schema  type  Article  name  Nilai url  https  wiki Nilai sameAs  http  www wikidata  entity  mainEntity  nomin  user tokens  editToken     patrolToken     watchToken     csrfToken        cite ux enhancements  math scripts         toc')
+Excl.add_to_exclusion_list(r'parser output tmulti thumbinner display flex flex direction column autoconfirmed sysop wgCoordinates parser output tmulti trow display flex flex direction row clear left flex wrap wrap width  box sizing border box  parser output tmulti tsingle margin px float left  parser output tmulti theader clear both font weight bold text align center align self center background color transparent width  parser output tmulti thumbcaption text align left background color transparent  parser output tmulti text align left text align left  parser output tmulti text align right text align right  parser output tmulti text align center text align center all and max width px parser output tmulti thumbinner width  important box sizing border box max width none important align items center  parser output tmulti trow justify content center  parser output tmulti tsingle float none important max width  important box sizing border box text align center  parser output tmulti thumbcaption text align center')
+Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort XNjswwpAIEIAAIU iM AAACN LCCN identifiers articles VIAF identifiers articles WorldCat VIAF identifiers   wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt       startUp flaggedRevs advanced   Collider Detector at Fermilab   XNnpDgpAMFQAAJ dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                     flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
 Excl.add_to_exclusion_list(r'templates January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template User Talk Pages XNmiKwpAMFoAAHP gAAABG Template User Talk Pages From the free encyclopedia Jump to navigation Jump to v e User Talk Pages User talk pages Usertalkpage User talk Usertalkback Userwhisperback Talk header preload Message Talkpagecool User notification preference Notification preferences NP Usertalkpage rounded User talk rules User talk top Usercomment Usertalkconcise Talk header User talk header Usertalksuper Usertalkpage blue User mbox Category Template documentation Initial visibility currently defaults to autocollapse To this template initial visibility the parameter may be used statecollapsed User Talk Pages')
 Excl.add_to_exclusion_list(r'Template Multiple issues Template Template Multiple issues Multiple issues template protected templates using small message boxes Exclude in print message templates message templates missing parameters Templates used by Twinkle Templates used by AutoWikiBrowser Lua based templates Templates using TemplateData templates Templates that add tracking category January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template Multiple issues XNnEWApAIC AAKhyJIkAAAAA templateeditor templateeditor templateData templateData images inputBox ui input ui checkbox oojs ui core oojs ui indicators oojs ui textures widgets oojs ui icons oojs ui icons alerts oojs ui icons interactions jquery makeCollapsible ui jquery tablesorter jquery makeCollapsible Template Multiple issues From the free encyclopedia Jump to navigation Jump to This article has multiple issues Please help improve it or discuss')
 Excl.add_to_exclusion_list(r'shortcutboxplain solid aaa fff em padding em em em em shortcutlist inline block bottom solid aaa bottom em normal shortcutanchordiv position relative top em Shortcuts WP REFB WP REFBEGIN WP REFSTAR')
@@ -83,6 +88,7 @@ class CsvAppender:
             return False
 
         html = ' '.join(Excl.stripHtml(html)[:6000].split())
+        Spider.animate_work(True)
 
         with Path(self.target_file) as file_p:
             if (not file_p.exists()):
@@ -162,15 +168,15 @@ class Spider():
     re_is_not_article = re.compile(r'[#?=]|(Wikipedia:)|(\.svg)|(\.jpg)|(\.png)|(\.gif)|(\.mp4)|(\.tiff)|(\.bmp)|(https:/[^\/])|(http:/[^\/])')
     anim_idx = 0
     anim = "/-\\|"
+    anim_calls = 0
 
-    def __init__(self, write_html_to='SpiderPig.csv', wait_between=.05, state_file='Spider.state', maxPages=10000, resume=False):
+    def __init__(self, write_html_to='SpiderPig.csv', state_file='Spider.state', maxPages=10000, resume=False):
         self.pagesVisited = []
         self.write_to = write_html_to
-        self.wait_between = wait_between
         self.state_file = state_file
         self.pagesToVisit = []
         self.maxPages = maxPages
-        
+
         try:
             with open(state_file, 'rb') as file:
                 state = pickle.load(file)
@@ -235,20 +241,24 @@ class Spider():
         except:
             print('Could not save state to: ', self.state_file)
 
-    def animate_work():
-        Spider.anim_idx += 1
-        print_string = Spider.anim[Spider.anim_idx % len(Spider.anim)]
-        print(print_string, end='\r')
+    def animate_work(force=False, times=1):
+        Spider.anim_calls = (Spider.anim_calls + 1) % 500
+        newAnim = Spider.anim_calls is 0
+        for i in range(times):
+            if (newAnim or force):
+                time.sleep(.14)
+                Spider.anim_idx += 1
+            print_string = ' {' + Spider.anim[Spider.anim_idx % len(Spider.anim)] + '}'
+            if (newAnim or force):
+                print(print_string, end='\r', flush=True)
         return print_string
 
     def appendUrl(self, url):
         self.pagesToVisit.append(url)
 
-    def crawl(self, maxPages=None, write_html_to=None, wait_between=None):
+    def crawl(self, maxPages=None, write_html_to=None):
         if (write_html_to is None):
-            write_html_to = self.write_to 
-        if (wait_between is None):
-            wait_between = self.wait_between
+            write_html_to = self.write_to
         if (maxPages is None):
             maxPages = self.maxPages
         
@@ -267,25 +277,29 @@ class Spider():
             url = self.pagesToVisit[0]
             self.pagesToVisit = self.pagesToVisit[1:]
             do_save_state = (do_save_state + 1) % 50
-            print_string = Spider.animate_work()
+            Spider.animate_work(True)
+            print_string = ''
             cols, lines = shutil.get_terminal_size(fallback=(80, 24))
             if (do_save_state == 0):
                 self.saveState()
             if (not url in self.pagesVisited or initial or not kb_interrupt):
-                time.sleep(self.wait_between)
                 try:
-                    print_string += " " + str(len(self.pagesVisited)) + ' Visiting: ' + url #17
-                    if len(print_string) + 22 >= cols:
-                        print_string = print_string[:cols-22]
+                    print_string += " " + str(len(self.pagesVisited)) + ' Visiting: ' + url
+                    if len(Spider.animate_work() + print_string) + 22 >= cols:
+                        print_string = print_string[:cols-22 + len(Spider.animate_work())]
+                    print((Spider.animate_work() + print_string + ' ** Page PARSING ** ').ljust(cols), end='\r', flush=True)
                     parser = LinkParser()
+                    Spider.animate_work(True)
                     innerText, links = parser.getLinks(url)
+                    print((Spider.animate_work() + print_string + ' ** Links FILTER ** ').ljust(cols), end='\r', flush=True)
                     links = list([l for l in links if (not l in self.pagesVisited) and Spider.re_valid_url.search(l) is not None and Spider.re_is_not_article.search(l) is None])
+                    Spider.animate_work(True, 4)
                     # append html to file
                     if (not initial and not url in self.pagesVisited and not url is None):
+                        print((Spider.animate_work() + print_string + ' ** Page SAVING  ** ').ljust(cols), end='\r', flush=True)
                         appended = csvAppender.append(url, innerText)
-
                         if appended:
-                            print_string += " ** Page SAVED   ** "
+                            print_string += " ** Page SAVE OK ** "
                             initial = False
                         else:
                             print_string += " ** Page IGNORED ** "
@@ -293,8 +307,9 @@ class Spider():
                         print_string += " ** Page IGNORED ** "
                         initial = False
 
-                    print_string = print_string.ljust(cols-1)[:cols]
-                    
+                    print_string = print_string.ljust(cols-1)[:cols - len(Spider.animate_work())]
+                    print(Spider.animate_work() + print_string, end='\r', flush=True)
+                    Spider.animate_work(True, 4)
                     # Add the pages that we should visit next to the end of our collection
                     # of pages to visit:
                     random.shuffle(links)
@@ -310,41 +325,31 @@ class Spider():
                 except error.HTTPError as e:
                     e_string = str(e)
                     len_e_string = len(e_string)
-                    len_visit_string = len("/ " + str(len(self.pagesVisited)) + ' Visiting:')
+                    len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
                     len_e_string -= len_visit_string
                     if (len_e_string < 0):
                         len_e_string = 0
-                    print_string = e_string + print_string[len_visit_string:-len_e_string] + '\n'
+                    print_string = e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
                 except UnicodeEncodeError as ue:
                     e_string = str(ue)
                     len_e_string = len(e_string)
-                    len_visit_string = len("/ " + str(len(self.pagesVisited)) + ' Visiting:')
+                    len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
                     len_e_string -= len_visit_string
                     if (len_e_string < 0):
                         len_e_string = 0
-                    print_string = e_string + print_string[len_visit_string:-len_e_string] + '\n'
+                    print_string = e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
                 except KeyboardInterrupt as ki:
-                    print_string = (str(ki) + ' > Stop crawling & save state').ljust(cols)
+                    print_string = ('\n' + str(ki) + ' > Stop crawling & save state\n').ljust(cols)[:cols]
                     kb_interrupt = True
                     self.saveState()
-
-            print(print_string, end="\r", flush=True)
+            print(Spider.animate_work() + print_string, end="\r", flush=True)
+            
 
     
 
-spider = Spider(wait_between=.001, resume=True, write_html_to='Random_Wiki_Pages.csv')
+spider = Spider(resume=True, write_html_to='Random_Wiki_Pages.csv')
 spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
 spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
-spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
-spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
-spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
-spider.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Heinrich_I._(Ostfrankenreich)')
-spider.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
-spider.appendUrl('https://de.wikipedia.org/wiki/Heinrich_I._(Ostfrankenreich)')
 spider.appendUrl('https://da.wikipedia.org/wiki/Forside')
 spider.appendUrl('https://es.wikipedia.org/wiki/Wikipedia:Portada')
 spider.appendUrl('https://bs.wikipedia.org/wiki/Po%C4%8Detna_strana')
