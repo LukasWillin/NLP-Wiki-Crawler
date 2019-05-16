@@ -4,8 +4,8 @@ Ich habe für mehr Testdaten einen Crawler geschrieben, der Wikipedia Pages abgr
 Der Crawler besucht nur Seiten, die er nicht bereits besucht hat, bzw. im angegebenen csv bereits abgelegt wurden. <br>
 Der Crawler entfernt Zahlen und einige Sonderzeichen, sowie Begriffe, die nicht zum eigentlichen Artikelinhalt gehören.
 
-Ihr könnt mit der Funktion `Spider#append` eigene Einstiegs-Urls angeben.
-Mit `Spider#crawl` startet ihr den Vorgang. <br>
+Ihr könnt mit der Funktion `Crawler#append` eigene Einstiegs-Urls angeben.
+Mit `Crawler#crawl` startet ihr den Vorgang. <br>
 Beim Contructor Spider den Parameter `resume=True` setzen, um mit den zuletzt abgelegten URLs weiter zu machen.
  
 Zum Abbrechen einfach jederzeit `Ctrl+C` drücken (Die Resultate werden fortlaufend abgelegt, gehen also nicht verloren). Auch wird der state in Spider.state gespeichert. <br> Dieser wird wieder aufgenommen, wenn `resume=True`.
@@ -17,3 +17,6 @@ In der Konsole das Python-Script starten mit
 > python ./crawl.py
 
 (allfällig Module mit `conda install` nachinstallieren)
+
+Die Texte können folgende Zeichen beinhalten:
+a-zA-ZäÄöÖüÜëËïÏåÅáÁàÀąĄóÓòÒøØèÈéÉêÊęĘċĊćĆčČùâúÚùÙÂôÔĩĨìÌíÍńŃǹǸñÑłŁƚȽżŻšŠśŚß sowie Leerschläge
