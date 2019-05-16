@@ -330,6 +330,14 @@ class Spider():
                     if (len_e_string < 0):
                         len_e_string = 0
                     print_string = " " + e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
+                except error.URLError as urle:
+                    e_string = str(urle)
+                    len_e_string = len(e_string)
+                    len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
+                    len_e_string -= len_visit_string
+                    if (len_e_string < 0):
+                        len_e_string = 0
+                    print_string = " " + e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
                 except UnicodeEncodeError as ue:
                     e_string = str(ue)
                     len_e_string = len(e_string)
