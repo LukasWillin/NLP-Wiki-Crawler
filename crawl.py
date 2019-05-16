@@ -28,7 +28,7 @@ class Excl:
     exclusions = set([])
     re_excl_split = re.compile(r'[\t\n\r\ ]')
     re_exclude = None
-    re_rem = re.compile(r'[^a-zA-ZäÄöÖüÜëËïÏåÅáÁàÀąĄóÓòÒøØèÈéÉêÊęĘćĆčČùâúÚÙÂôÔĩĨìÌíÍńŃǹǸñÑłŁƚȽżŻšŠśŚ\ ]')
+    re_rem = re.compile(r'[^a-zA-ZäÄöÖüÜëËïÏåÅáÁàÀąĄóÓòÒøØèÈéÉêÊęĘċĊćĆčČùâúÚùÙÂôÔĩĨìÌíÍńŃǹǸñÑłŁƚȽżŻšŠśŚß\ ]')
     re_space = re.compile(r'[\t\n\r\.\:\;\,\-\_\"\'\?\!\(\)\{\}\*\@\+\-\<\>\/\\\|0-9]')
     re_whitespace_trim = re.compile(r'(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ |\ \ \ \ \ \ |\ \ \ \ |\ \ |\t)')
     def add_to_exclusion_list(from_string):
@@ -53,14 +53,16 @@ class Excl:
 
 Excl.add_to_exclusion_list(r'autocollapse statecollapsed wikipedia Wikipedia wpsearch QUERY TERMS ShortSearch document documentElement className  document documentElement className replace      s client nojs  s       client js        titlePunishmentoldid window RLQwindow RLQ    push function   mw config set   wgCanonicalNamespace      wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories ')
 Excl.add_to_exclusion_list(r'editWarning wgStructuredChangeFilters  mediawiki action edit collapsibleFooter href  site   mediawiki page startup   mediawiki page ready   mediawiki searchSuggest   ext charinsert   ext gadget teahouse   ext gadget ReferenceTooltips   ext gadget watchlist notice   ext gadget DRN wizard   ext gadget charinsert   ext gadget refToolbar   ext gadget extra toolbar buttons   ext gadget switcher   ext centralauth centralautologin   ext CodeMirror   mmv head   mmv bootstrap autostart   ext popups   ext visualEditor desktopArticleTarget init   ext visualEditor targetLoader   ext eventLogging   ext wikimediaEvents   ext navigationTiming   ext uls compactlinks   ext uls interface   ext quicksurveys init   ext centralNotice geoIP   skins vector js  mw loader load RLPAGEMODULES')
-Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl herit inherit inherit inherit cs hidden error cs visible error cs maint aa cs subscription cs registration cs format cs kern cs kern wl cs kern cs kern wl pageneeded wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice UTC  wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId Wikimedia Commons Wikidata index php Creative Commons Attribution ShareAlike License         wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories   Articles with short description')
+Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl herit inherit inherit inherit cs hidden error cs visible error cs maint aa cs subscription cs registration cs format cs kern cs kern wl cs kern cs kern wl pageneeded wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice UTC  wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId Wikimedia Commons Wikidata index php Creative Commons Attribution ShareAlike License         wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups td tr tbody table      wgCategories   Articles with short description')
 Excl.add_to_exclusion_list(r'wgRelevantPageName wgBackendResponseTime wgHostname wgRelevantArticleId wgSiteNoticeId dismissableSiteNotice cqd ng required helpers helplink htmlform ooui htmlform DateInputWidget userSuggest htmlform htmlform ooui UserInputWidget DateInputWidget thanks corethank   wgRequestId  XNmm QpAIEIAAA SGIAAABD  wgCSPNonce  wgIsProbablyEditable  wgRelevantPageIsProbablyEditable  wgRestrictionEdit  wgRestrictionMove  wgMediaViewerOnClick  wgMediaViewerEnabledByDefault  wgPopupsReferencePreviews  wgPopupsConflictsWithNavPopupGadget  wgVisualEditor  pageLanguageCode  en  pageLanguageDir  ltr  pageVariantFallbacks  en  wgMFDisplayWikibaseDescriptions  search  nearby    tagline   wgRelatedArticles  wgRelatedArticlesUseCirrusSearch  wgRelatedArticlesOnlyUseCirrusSearch  wgWMESchemaEditAttemptStepOversample  wgPoweredByHHVM  wgULSCurrentAutonym  English  wgNoticeProject   wgCentralNoticeCookiesToDelete  wgCentralNoticeCategoriesUsingLegacy  Fundraising  fundraising  wgWikibaseItemId  Q     wgCentralAuthMobileDomain  wgEditSubmitButtonLabelPublish    state   styles    globalCssJs user styles    globalCssJs styles    styles   noscript   user styles    globalCssJs user    globalCssJs    user   user options   user tokens  loading  cite styles    math styles    legacy shared    legacy commonPrint    toc styles   wikibase      noscript    interlanguage    wikimediaBadges    d styles    skinning     styles     implement user tokens tffind  jQuery require module  displaystyle X displaystyle  alpha Leftrightarrow wgPageParseReport limitreport cputime  walltime  ppvisitednodes  limit  ppgeneratednodes  limit  postexpandincludesize  limit  templateargumentsize limit  expansiondepth  limit  expensivefunctioncount  limit unstrip depth  limit  unstrip size  limit  entityaccesscount  limit timingprofile   Templat References    total   Templat Cite journal   Templat Main other scribunto limitreport timeusage   limit   limitreport memusage   limit  cachereport origin timestamp  ttl  transientcontent      context  https  schema  type  Article  name  Nilai url  https  wiki Nilai sameAs  http  www wikidata  entity  mainEntity  nomin  user tokens  editToken     patrolToken     watchToken     csrfToken        cite ux enhancements  math scripts         toc')
-Excl.add_to_exclusion_list(r'parser output tmulti thumbinner display flex flex direction column autoconfirmed sysop wgCoordinates parser output tmulti trow display flex flex direction row clear left flex wrap wrap width  box sizing border box  parser output tmulti tsingle margin px float left  parser output tmulti theader clear both font weight bold text align center align self center background color transparent width  parser output tmulti thumbcaption text align left background color transparent  parser output tmulti text align left text align left  parser output tmulti text align right text align right  parser output tmulti text align center text align center all and max width px parser output tmulti thumbinner width  important box sizing border box max width none important align items center  parser output tmulti trow justify content center  parser output tmulti tsingle float none important max width  important box sizing border box text align center  parser output tmulti thumbcaption text align center')
-Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort XNjswwpAIEIAAIU iM AAACN LCCN identifiers articles VIAF identifiers articles WorldCat VIAF identifiers   wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      categoryPage categoryTree tmh thumbnail xs k af categoryTree MediaWikiPlayer PopUpMediaTransform startUp flaggedRevs advanced classNamedocument  Collider Detector at Fermilab   XNnpDgpAMFQAAJ dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                     flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
+Excl.add_to_exclusion_list(r'parser output RLSTATE plainlist ul list main wgIsMainPage tmulti thumbinner display flex flex direction column autoconfirmed sysop wgCoordinates parser output tmulti trow display flex flex direction row clear left flex wrap wrap width  box sizing border box  parser output tmulti tsingle margin px float left  parser output tmulti theader clear both font weight bold text align center align self center background color transparent width  parser output tmulti thumbcaption text align left background color transparent  parser output tmulti text align left text align left  parser output tmulti text align right text align right  parser output tmulti text align center text align center all and max width px parser output tmulti thumbinner width  important box sizing border box max width none important align items center  parser output tmulti trow justify content center  parser output tmulti tsingle float none important max width  important box sizing border box text align center  parser output tmulti thumbcaption text align center')
+Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort XNjswwpAIEIAAIU iM AAACN LCCN identifiers articles VIAF identifiers articles WorldCat VIAF identifiers   wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      categoryPage categoryTree tmh thumbnail xs k af categoryTree MediaWikiPlayer PopUpMediaTransform startUp flaggedRevs advanced classNamedocument  Collider Detector at Fermilab   XNnpDgpAMFQAAJ dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch Line data file data file td                    flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
 Excl.add_to_exclusion_list(r'templates January span dotted cursor cs ws c Wikisource logo Wikisource logo no repeat wgRelevantUserName bibcoded see bibcode Bibcode February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template User Talk Pages XNmiKwpAMFoAAHP gAAABG Template User Talk Pages From the free encyclopedia Jump to navigation Jump to v e User Talk Pages User talk pages Usertalkpage User talk Usertalkback Userwhisperback Talk header preload Message Talkpagecool User notification preference Notification preferences NP Usertalkpage rounded User talk rules User talk top Usercomment Usertalkconcise Talk header User talk header Usertalksuper Usertalkpage blue User mbox Category Template documentation Initial visibility currently defaults to autocollapse To this template initial visibility the parameter may be used statecollapsed User Talk Pages')
-Excl.add_to_exclusion_list(r'Template Multiple issues Template Template Multiple issues Multiple issues template protected templates using small message boxes Exclude in print message templates message templates missing parameters Templates used by Twinkle Templates used by AutoWikiBrowser Lua based templates Templates using TemplateData templates Templates that add tracking category January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template Multiple issues XNnEWApAIC AAKhyJIkAAAAA templateeditor templateeditor templateData templateData images inputBox ui input ui checkbox oojs ui core oojs ui indicators oojs ui textures widgets oojs ui icons oojs ui icons alerts oojs ui icons interactions jquery makeCollapsible ui jquery tablesorter jquery makeCollapsible Template Multiple issues From the free encyclopedia Jump to navigation Jump to This article has multiple issues Please help improve it or discuss')
+Excl.add_to_exclusion_list(r'Template Csmall Multiple issues Template Template Multiple issues Multiple issues template protected templates using small message boxes Exclude in print message templates message templates missing parameters Templates used by Twinkle Templates used by AutoWikiBrowser Lua based templates Templates using TemplateData templates Templates that add tracking category January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template Multiple issues XNnEWApAIC AAKhyJIkAAAAA templateeditor templateeditor templateData templateData images inputBox ui input ui checkbox oojs ui core oojs ui indicators oojs ui textures widgets oojs ui icons oojs ui icons alerts oojs ui icons interactions jquery makeCollapsible ui jquery tablesorter jquery makeCollapsible Template Multiple issues From the free encyclopedia Jump to navigation Jump to This article has multiple issues Please help improve it or discuss')
 Excl.add_to_exclusion_list(r'shortcutboxplain solid aaa fff em padding em em em em shortcutlist inline block bottom solid aaa bottom em normal shortcutanchordiv position relative top em Shortcuts WP REFB WP REFBEGIN WP REFSTAR ExternalData service geomask maps geoshape getgeojson idsQ properties geomask marker symbol soccer stroke fill opacity marker FF fill FFFFE ExternalData service geoline maps geoline getgeojson idsQ properties geoline marker symbol soccer stroke stroke FF marker FF features Feature geometry')
-Excl.add_to_exclusion_list(r'Change links was last changed on Text is available under Creative Commons Attribution Share Alike License GFDL additional terms apply See Terms of Use for details Privacy policy About Disclaimers Developers Cookie statement Mobile About Disclaimers Contact Developers Cookie statement Mobile Lang es Reflist web Text is available under Creative Commons Attribution ShareAlike License additional terms apply By you agree Terms of Use Privacy Policy is registered trademark of Wikimedia Foundation Inc non profit organization Privacy policy About Disclaimers Contact Developers Cookie statement Mobile Infobox settlement Infobox Coord Infobox settlement areadisp Infobox settle Hidden categories Noindexed Navigation menu Personal tools Not logged')
+Excl.add_to_exclusion_list(r'Subcategories subcategories Change links was last changed on Text is available under Creative Commons Attribution Share Alike License GFDL additional terms apply See Terms of Use for details Privacy policy About Disclaimers Developers Cookie statement Mobile About Disclaimers Contact Developers Cookie statement Mobile Lang es Reflist web Text is available under Creative Commons Attribution ShareAlike License additional terms apply By you agree Terms of Use Privacy Policy is registered trademark of Wikimedia Foundation Inc non profit organization Privacy policy About Disclaimers Contact Developers Cookie statement Mobile Infobox settlement Infobox Coord Infobox settlement areadisp Infobox settle Hidden categories Noindexed Navigation menu Personal tools Not logged')
+Excl.add_to_exclusion_list(r'HDI Area Database Global Data Lab hdi globaldatalab Retrieved citation citation q quotes citation lock Lock green Lock green citation lock limited citation lock Lock gray Lock gray citation lock Lock red Lock red code code')
+Excl.add_to_exclusion_list(r'quiet hover main quiet focus main footer quiet hover main footer quiet focus ad headline number media min main rem rem rem media min main wrapper rem main wrapper rem main rem rem rem media min main wrapper main wrapper main wrapper main wrapper main rem rem rem main p main main ul rem main quiet main main articleCount skin minerva main articleCount main mobileSearch rem skin minerva main mobileSearch main mobileSearchButton shadow rgba media min main f f fa ccd radius shadow rgba rem rem main ul main articleCount rem skin minerva main articleCount skin minerva main mobileSearch media min main letters banner rem rem rem main linear gradient f f fa f f fa rgba rem rem rem main main ul reverse main createArticle li quiet skin modern main line rem rem')
 # An appender which strips the html from unnecessary content
 # Appends the text to a csv for storage
 class CsvAppender:
@@ -158,20 +160,16 @@ class Crawler():
 
         try:
             with open(state_file, 'rb') as file:
-                state = pickle.load(file)
-                state = Crawler.mapState(state, '2')
-                self.pagesVisited = state['d']['pv']
+                state = Crawler.mapState(pickle.load(file), '3')
                 if (resume):
-                    self.pagesToVisit = state['d']['tv']
+                    self.pagesToVisit = state['d']['pages-to-visit']
                 file.close()
         except:
             try: # Old standard State file 
                 with open('Spider.state', 'rb') as file:
-                    state = pickle.load(file)
-                    state = Crawler.mapState(state, '2')
-                    self.pagesVisited = state['d']['pv']
+                    state = Crawler.mapState(pickle.load(file), '3')
                     if (resume):
-                        self.pagesToVisit = state['d']['tv']
+                        self.pagesToVisit = state['d']['pages-to-visit']
                     file.close()
             except:
                 print('Did not load state from: ', state_file)
@@ -201,6 +199,8 @@ class Crawler():
         if (srcVersion is '2'):
             pagesVisited = src['d']['pv']
             pagesToVisit = src['d']['tv']
+        if (srcVersion is '3'):
+            pagesToVisit = src['d']['pages-to-visit']
         
         if (targetVersion is '1'):
             return {
@@ -215,6 +215,13 @@ class Crawler():
                     'tv': pagesToVisit
                 }
             }
+        if (targetVersion is '3'):
+            return {
+                'v': '3',
+                'd': {
+                    'pages-to-visit': pagesToVisit
+                }
+            }
         
         return src
         
@@ -225,10 +232,9 @@ class Crawler():
         try:
             with open(self.state_file, 'wb') as file:
                 pickle.dump({
-                    'v': '2',
+                    'v': '3',
                     'd': {
-                        'pv': self.pagesVisited,
-                        'tv': self.pagesToVisit
+                        'pages-to-visit': self.pagesToVisit
                     }
                 }, file)
                 file.close()
@@ -256,6 +262,47 @@ class Crawler():
     def appendUrl(self, url):
         self.pagesToVisit.append(url)
 
+    STEP_MESSAGES = [
+        'Page  VISITING', # 0
+        'Page  PARSING', # 1
+        'Links FILTER', # 2
+        'Page  SAVING', # 3
+        'Page  SAVE OK', # 4
+        'Page  IGNORED', # 5
+        'Crawl STOP', # 6
+        'State SAVE' # 7
+    ]
+
+    def cprint(self, steps=None, url=None, error=None, end=None, flush=True, custom=None):
+
+        if (not custom is None):
+            print_string = custom
+        else:
+            print_string = Crawler.animate_work() + ' '
+
+            if (not error is None):
+                print_string += str(error) + ': '
+            else:
+                print_string += str(len(self.pagesVisited) + 1).rjust(5) + ' - '
+
+        if (not steps is None):
+            for s in steps:
+                print_string += Crawler.STEP_MESSAGES[s] + ' & '
+            print_string = print_string[:-2]
+            if (not url is None):
+                print_string += ': '
+
+        if (not url is None):
+            print_string += url
+
+        cols, lines = shutil.get_terminal_size(fallback=(79, 23))
+        print_string = print_string.ljust(cols-3)[:cols-3] + '...'
+
+        print(print_string, end=end or '\r', flush=flush)
+
+        return print_string
+        
+
     '''
     Start crawling wikipedia. Exit with CTRL+C (for Linux and Windows).
     '''
@@ -269,7 +316,7 @@ class Crawler():
         do_save_state = 0
         initial = True
         kb_interrupt = False
-        cols, lines = shutil.get_terminal_size(fallback=(80, 24))
+
         # The main loop. Create a LinkParser and get all the links on the page.
         try:
             while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != [] and not kb_interrupt:
@@ -279,86 +326,60 @@ class Crawler():
                 do_save_state = (do_save_state + 1) % 50
                 Crawler.animate_work(True)
                 print_string = ''
-                cols, lines = shutil.get_terminal_size(fallback=(80, 24))
+                
                 if (do_save_state == 0):
                     self.saveState()
-                if (not url in self.pagesVisited or initial or not kb_interrupt):
-                    try:
-                        print_string += " " + str(len(self.pagesVisited)) + ' Visiting: ' + url
-                        if len(Crawler.animate_work() + print_string) + 22 >= cols:
-                            print_string = print_string[:cols-22 + len(Crawler.animate_work())]
-                        print((Crawler.animate_work() + print_string + ' ** Page PARSING ** ').ljust(cols), end='\r', flush=True)
-                        parser = LinkParser()
-                        Crawler.animate_work(True)
-                        innerText, links = parser.getLinks(url)
-                        print((Crawler.animate_work() + print_string + ' ** Links FILTER ** ').ljust(cols), end='\r', flush=True)
-                        links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.search(l) is not None and Crawler.re_is_not_article.search(l) is None])
-                        Crawler.animate_work(True, 3)
-                        # append html to file
-                        if (not initial and not url in self.pagesVisited and not url is None):
-                            print((Crawler.animate_work() + print_string + ' ** Page SAVING  ** ').ljust(cols), end='\r', flush=True)
-                            appended = csvAppender.append(url, innerText)
-                            if appended:
-                                print_string += " ** Page SAVE OK ** "
-                                initial = False
-                            else:
-                                print_string += " ** Page IGNORED ** "
-                        else:
-                            print_string += " ** Page IGNORED ** "
-                            initial = False
 
-                        print_string = print_string.ljust(cols-1)[:cols - len(Crawler.animate_work())]
-                        print(Crawler.animate_work() + print_string, end='\r', flush=True)
-                        Crawler.animate_work(True, 3)
-                        # Add the pages that we should visit next to the end of our collection
-                        # of pages to visit:
-                        random.shuffle(links)
-                        weight = 3
-                        lang = CsvAppender.getLang(url)
-                        if (lang is 'G' or lang is 'E'):
-                            weight = 4
-                        links = links[:weight]
-                        self.pagesToVisit = self.pagesToVisit + links
-                        random.shuffle(self.pagesToVisit)
-                        self.pagesToVisit = self.pagesToVisit[:200]
-                        self.pagesVisited.append(url)
-                    except error.HTTPError as e:
-                        e_string = str(e)
-                        len_e_string = len(e_string)
-                        len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
-                        len_e_string -= len_visit_string
-                        if (len_e_string < 0):
-                            len_e_string = 0
-                        print_string = " " + e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
-                    except error.URLError as urle:
-                        e_string = str(urle)
-                        len_e_string = len(e_string)
-                        len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
-                        len_e_string -= len_visit_string
-                        if (len_e_string < 0):
-                            len_e_string = 0
-                        print_string = " " + e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
-                    except UnicodeEncodeError as ue:
-                        e_string = str(ue)
-                        len_e_string = len(e_string)
-                        len_visit_string = len(str(len(self.pagesVisited)) + ' Visiting:')
-                        len_e_string -= len_visit_string
-                        if (len_e_string < 0):
-                            len_e_string = 0
-                        print_string = " " + e_string + print_string[len_visit_string:(cols-len_e_string)] + '\n'
-                    except KeyboardInterrupt as ki:
-                        print_string = ('\n' + str(ki) + ' > Stop crawling & save state\n').ljust(cols)[:cols]
-                        kb_interrupt = True
-                        self.saveState()
-                print(Crawler.animate_work() + print_string, end="\r", flush=True)
+                if (not url in self.pagesVisited or initial or not kb_interrupt):
+                    self.cprint(steps=[1], url=url)
+                    parser = LinkParser()
+                    Crawler.animate_work(True)
+                    innerText, links = parser.getLinks(url)
+                    self.cprint(steps=[2], url=url)
+                    Crawler.animate_work(True)
+                    links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.search(l) is not None and Crawler.re_is_not_article.search(l) is None])
+                    Crawler.animate_work(True)
+                    # append html to file
+                    if (not initial and not url in self.pagesVisited and not url is None):
+                        self.cprint(steps=[3], url=url)
+                        appended = csvAppender.append(url, innerText)
+                        if appended:
+                            self.cprint(steps=[4], url=url)
+                            initial = False
+                        else:
+                            self.cprint(steps=[5], url=url)
+                    else:
+                        self.cprint(steps=[5], url=url)
+                        initial = False
+
+                    Crawler.animate_work(True)
+                    # Add the pages that we should visit next to the end of our collection
+                    # of pages to visit:
+                    random.shuffle(links)
+                    Crawler.animate_work(True)
+                    weight = 3
+                    lang = CsvAppender.getLang(url)
+                    if (lang is 'G' or lang is 'E'):
+                        weight = 4
+                    links = links[:weight]
+                    self.pagesToVisit = self.pagesToVisit + links
+                    Crawler.animate_work(True)
+                    random.shuffle(self.pagesToVisit)
+                    self.pagesToVisit = self.pagesToVisit[:200]
+                    self.pagesVisited.append(url)
+        except error.HTTPError as he:
+            self.cprint(error=he, url=url, end='\n')
+        except error.URLError as urle:
+            self.cprint(error=urle, url=url, end='\n')
+        except UnicodeEncodeError as uee:
+            self.cprint(error=uee, url=url, end='\n')
         except KeyboardInterrupt as ki:
-            print_string = ('\n' + str(ki) + ' > Stop crawling & save state\n').ljust(cols)[:cols]
+            self.cprint(error=ki, steps=[6, 7])
             kb_interrupt = True
             self.saveState()
-            print(Crawler.animate_work() + print_string, end="\r", flush=True)
-            
 
-    
+
+
 
 crawler = Crawler(resume=True, write_html_to='Random_Wiki_Pages.csv')
 crawler.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
