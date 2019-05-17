@@ -14,7 +14,7 @@ In der Konsole das Python-Script starten mit
 
 > conda activate base
 
-> python ./crawl.py
+> python crawl.py
 
 (allfällig Module mit `conda install` nachinstallieren)
 
