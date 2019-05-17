@@ -8,7 +8,7 @@ Ihr könnt mit der Funktion `Crawler#append` eigene Einstiegs-Urls angeben.
 Mit `Crawler#crawl` startet ihr den Vorgang. <br>
 Beim Contructor Spider den Parameter `resume=True` setzen, um mit den zuletzt abgelegten URLs weiter zu machen.
  
-Zum Abbrechen einfach jederzeit `Ctrl+C` drücken (Die Resultate werden fortlaufend abgelegt, gehen also nicht verloren). Auch wird der state in Spider.state gespeichert. <br> Dieser wird wieder aufgenommen, wenn `resume=True`.
+Zum Abbrechen einfach jederzeit `Ctrl+C` drücken (Die Resultate werden fortlaufend abgelegt, gehen also nicht verloren). Auch wird der state in Crawler.state gespeichert. <br> Dieser wird wieder aufgenommen, wenn `resume=True`.
 
 In der Konsole das Python-Script starten mit
 
