@@ -70,40 +70,47 @@ Excl.add_to_exclusion_list(r'shortcutboxplain solid aaa fff em padding em em em 
 Excl.add_to_exclusion_list(r'Subcategories subcategories Change links was last changed on Text is available under Creative Commons Attribution Share Alike License GFDL additional terms apply See Terms of Use for details Privacy policy About Disclaimers Developers Cookie statement Mobile About Disclaimers Contact Developers Cookie statement Mobile Lang es Reflist web Text is available under Creative Commons Attribution ShareAlike License additional terms apply By you agree Terms of Use Privacy Policy is registered trademark of Wikimedia Foundation Inc non profit organization Privacy policy About Disclaimers Contact Developers Cookie statement Mobile Infobox settlement Infobox Coord Infobox settlement areadisp Infobox settle Hidden categories Noindexed Navigation menu Personal tools Not logged')
 Excl.add_to_exclusion_list(r'HDI Area Database Global Data Lab hdi globaldatalab Retrieved citation citation q quotes citation lock Lock green Lock green citation lock limited citation lock Lock gray Lock gray citation lock Lock red Lock red code code')
 Excl.add_to_exclusion_list(r'Wanted files files Media statistics Tala da reng Differences Permanent link Random Random root Redirect revision log ID simpan VIPS scaling test pamanintun MIME API feature usage API sandbox Abuse filter configuration Wanted Lists tree group rights List OAuth applications List globally blocked IP addresses Membership global groups Notifications quiet hover main quiet focus main footer quiet hover main footer quiet focus ad headline number media min main rem rem rem media min main wrapper rem main wrapper rem main rem rem rem media min main wrapper main wrapper main wrapper main wrapper main rem rem rem main p main main ul rem main quiet main main articleCount skin minerva main articleCount main mobileSearch rem skin minerva main mobileSearch main mobileSearchButton shadow rgba media min main f f fa ccd radius shadow rgba rem rem main ul main articleCount rem skin minerva main articleCount skin minerva main mobileSearch media min main letters banner rem rem rem main linear gradient f f fa f f fa rgba rem rem rem main main ul reverse main createArticle li quiet skin modern main line rem rem')
-Excl.add_to_exclusion_list(r'b ISO retrieved b ISO retrieved b ISO retrieved b ISO retrieved b ISO retrieved featured mySandbox AdvancedSiteNotices datePublished T Z dateModified T Z Timezones B B author Organization Contributors projects publisher Organization ImageObject static wmf')
-
+Excl.add_to_exclusion_list(r'b ISO RLCONF posterDirected retrieved b ISO retrieved b ISO retrieved b ISO retrieved b ISO retrieved featured mySandbox AdvancedSiteNotices datePublished T Z dateModified T Z Timezones B B author Organization Contributors projects publisher Organization ImageObject static wmf')
+Excl.add_to_exclusion_list(r'deprecated syntax pygments Module Check unknown Module history purge avoid large scale disruption unnecessary server any changes should first tested modules testcases')
 
 # An appender which strips the html from unnecessary content
 # Appends the text to a csv for storage
 class CsvAppender:
     re_en = re.compile(r'\bhttps\:\/\/(www\.){0,1}(en|simple)\.wikipedia\.org')
     re_de = re.compile(r'\bhttps\:\/\/(www\.){0,1}de\.wikipedia\.org')
-    re_x = re.compile(r'\bhttps\:\/\/(www\.){0,1}(es|bs|da|ms|fi|fr|it|pam|af|frr|nl|ceb|war|eu)\.wikipedia\.org')
+    re_x = re.compile(r'\bhttps\:\/\/(www\.){0,1}(es|bs|da|ms|fi|fr|it|sv|pam|af|frr|nl|ceb|war|eu)\.wikipedia\.org')
 
     def __init__(self, target_file):
         self.target_file = target_file
 
     def getLang(url):
-        lang = None
-        if (CsvAppender.re_de.search(url) is not None):
-            lang = 'G'
-        elif (CsvAppender.re_en.search(url) is not None):
-            lang = 'E'
-        elif (CsvAppender.re_x.search(url) is not None):
-            lang = 'X'
+        if (url is None):
+            return None
         
-        return lang
+        if (CsvAppender.re_de.search(url) is not None):
+            return 'G'
+        elif (CsvAppender.re_en.search(url) is not None):
+            return 'E'
+        elif (CsvAppender.re_x.search(url) is not None):
+            return 'X'
 
+        return None
+        
     def append(self, url, html):
         lang = CsvAppender.getLang(url)
 
         if (lang is None):
             return False
+
         # remove space sequences
-        html = Excl.clean(html)[:4000] # ' '.join(Excl.stripHtml(html)[:6000].split())
+        html = Excl.clean(html)[:4000]
+        
+        if (html is ''):
+            return False
+
         Crawler.animate_work(True)
 
-        # Then store the text at the end of the existing file or create it
+        # Then store the text at the end of the existing csv or create it
         with Path(self.target_file) as file_p:
             if (not file_p.exists()):
                 with open(self.target_file, 'w', encoding='utf-8') as file_w:
@@ -113,6 +120,7 @@ class CsvAppender:
         with open(self.target_file, 'a', encoding='utf-8') as file:
             file.write(lang + ';' + url + ';' + html + '\n')
             file.close()
+
         Crawler.animate_work(True)
 
         return True
@@ -139,15 +147,15 @@ class LinkParser(HTMLParser):
 
     def getLinks(self, url):
         self.links = []
-        
         self.baseUrl = url
-        crawler.cprint(steps=[0], url=url)
+        self.crawler.cprint(steps=[0], url=url)
+
         with urlopen(url) as response:
             if LinkParser.re_type_html.match(response.getheader('Content-Type')) is not None:
                 htmlBytes = response.read()
                 self.htmlString = htmlBytes.decode("utf-8")
                 self.innerText = ""
-                crawler.cprint(steps=[1], url=url)
+                self.crawler.cprint(steps=[1], url=url)
                 self.feed(self.htmlString)
                 response.close()
                 return self.innerText, self.links
@@ -257,7 +265,7 @@ class Crawler():
     Creates and animation like {/} > {–} > {\} > {|}
     '''
     def animate_work(force=False, times=1, delay=.1):
-        Crawler.anim_calls = (Crawler.anim_calls + 1) % 30
+        Crawler.anim_calls = (Crawler.anim_calls + 1) % 50
         newAnim = Crawler.anim_calls is 0
         for i in range(times):
             if (newAnim or force):
@@ -278,24 +286,24 @@ class Crawler():
     STEP_MESSAGES = [
         'Page  REQUEST', # 0
         'Page  PARSING', # 1
-        'Links FILTER', # 2
-        'Page  SAVING', # 3
+        'Links FILTER ', # 2
+        'Page  SAVING ', # 3
         'Page  SAVE OK', # 4
         'Page  IGNORED', # 5
-        'Crawl STOP', # 6
-        'State SAVE' # 7
+        'Crawl STOP   ', # 6
+        'State SAVE   ' # 7
     ]
 
     def cprint(self, steps=None, url=None, error=None, end=None, flush=True, custom=None):
-
+        print('\r', end='\r')
+        print_string = ''
         if (not custom is None):
             print_string = custom
         else:
-            print_string = Crawler.animate_work() + ' '
-
             if (not error is None):
-                print_string += str(error) + ': '
+                print_string = str(error) + ': '
             else:
+                print_string = Crawler.animate_work() + ' '
                 print_string += str(len(self.pagesVisited) + 1).rjust(5) + ' - '
 
         if (not steps is None):
@@ -304,9 +312,12 @@ class Crawler():
             print_string = print_string[:-2]
             if (not url is None):
                 print_string += ': '
-
-        if (not url is None):
-            print_string += url
+        
+        lang = CsvAppender.getLang(url)
+        if (not lang is None):
+            print_string += lang + ' = '
+        
+        print_string += url or ''
 
         cols, lines = shutil.get_terminal_size(fallback=(79, 23))
         print_string = print_string.ljust(cols-3)[:cols-3] + '...'
@@ -328,21 +339,19 @@ class Crawler():
         csvAppender = CsvAppender(write_html_to)
         do_save_state = 0
         initial = True
-        kb_interrupt = False
 
         # The main loop. Create a LinkParser and get all the links on the page.
         try:
-            while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != [] and not kb_interrupt:
+            while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != []:
                 # Start from the beginning of our collection of pages to visit:
                 url = self.pagesToVisit[0]
                 self.pagesToVisit = self.pagesToVisit[1:]
-                do_save_state = (do_save_state + 1) % 50
-                Crawler.animate_work(True)
                 
+                do_save_state = (do_save_state + 1) % 50
                 if (do_save_state == 0):
                     self.saveState()
 
-                if (not url in self.pagesVisited or initial or not kb_interrupt):
+                if (not url in self.pagesVisited or initial):
                     # self.cprint(steps=[1], url=url)
                     parser = LinkParser(self)
 
@@ -362,17 +371,16 @@ class Crawler():
                     links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.match(l) is not None and Crawler.re_is_not_article.search(l) is None])
                     Crawler.animate_work(True)
                     # append html to file
-                    if (not initial and not url in self.pagesVisited and not url is None):
+                    if (not url is None and not url in self.pagesVisited):
                         self.cprint(steps=[3], url=url)
                         appended = csvAppender.append(url, innerText)
                         if appended:
                             self.cprint(steps=[4], url=url)
                             initial = False
                         else:
-                            self.cprint(steps=[5], url=url)
+                            self.cprint(steps=[5], url=url, end='\n')
                     else:
-                        self.cprint(steps=[5], url=url)
-                        initial = False
+                        self.cprint(steps=[5], url=url, end='\n')
 
                     Crawler.animate_work(True)
                     # Add the pages that we should visit next to the end of our collection
@@ -391,8 +399,7 @@ class Crawler():
                     self.pagesVisited.append(url)
         
         except KeyboardInterrupt as ki:
-            self.cprint(error=ki, steps=[6, 7])
-            kb_interrupt = True
+            self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
             self.saveState()
 
 
