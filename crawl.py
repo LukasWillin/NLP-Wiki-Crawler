@@ -15,6 +15,7 @@ from urllib.request import urlopen
 from urllib import parse
 from urllib import error
 from contextlib2 import closing
+from math import ceil
 import random
 import pandas
 import shutil
@@ -22,6 +23,23 @@ import pickle
 import sys
 import time
 import re
+import os
+
+# Ressources used for multiprocessing:
+# - (About threads but principles apply) https://www.codementor.io/lance/simple-parallelism-in-python-du107klle
+# - (About threads but principles apply) https://www.metachris.com/2016/04/python-threadpool/
+# - https://www.blog.pythonlibrary.org/2016/08/02/python-201-a-multiprocessing-tutorial/
+# - https://pymotw.com/2/multiprocessing/basics.html
+# - https://pythontic.com/multiprocessing/process/start
+# - https://docs.python.org/3/library/multiprocessing.html#multiprocessing.get_context
+
+from multiprocessing import Queue, JoinableQueue
+from multiprocessing import Pool
+from multiprocessing import Process, Lock
+
+# Signal trapping
+import signal
+import sys
 
 class Excl:
 
@@ -46,17 +64,12 @@ class Excl:
     re_rem_space = re.compile(r'\ {2,}')
 
     def stripHtml(html):
-        # Crawler.animate_work(True)
         html = Excl.re_space.sub(' ', html)
-        # Crawler.animate_work(True)
         html = Excl.re_rem.sub('', html)
-        # Crawler.animate_work(True)
         return Excl.re_exclude.sub('', html)
 
     def clean(text):
         return Excl.re_rem_space.sub(' ', text)
-
-        
 
 Excl.add_to_exclusion_list(r'autocollapse statecollapsed wikipedia Wikipedia wpsearch QUERY TERMS ShortSearch document documentElement className most interwikis Page document documentElement className replace      s client nojs  s       client js        titlePunishmentoldid window RLQwindow RLQ    push function   mw config set   wgCanonicalNamespace      wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories ')
 Excl.add_to_exclusion_list(r'editWarning wgStructuredChangeFilters Expand Gadget usage statistics Graph sandbox List wikis system sandbox Try hieroglyph markup View interwiki Wiki sets Redirecting special mediawiki action edit collapsibleFooter href  site   mediawiki page startup   mediawiki page ready   mediawiki searchSuggest   ext charinsert   ext gadget teahouse   ext gadget ReferenceTooltips   ext gadget watchlist notice   ext gadget DRN wizard   ext gadget charinsert   ext gadget refToolbar   ext gadget extra toolbar buttons   ext gadget switcher   ext centralauth centralautologin   ext CodeMirror   mmv head   mmv bootstrap autostart   ext popups   ext visualEditor desktopArticleTarget init   ext visualEditor targetLoader   ext eventLogging   ext wikimediaEvents   ext navigationTiming   ext uls compactlinks   ext uls interface   ext quicksurveys init   ext centralNotice geoIP   skins vector js  mw loader load RLPAGEMODULES')
@@ -127,10 +140,6 @@ class CsvAppender:
 
 class LinkParser(HTMLParser):
 
-    def __init__(self, crawler):
-        super().__init__()
-        self.crawler = crawler
-
     re_type_html = re.compile(r'(text\/html\;)')
 
     def handle_starttag(self, tag, attrs):
@@ -143,25 +152,60 @@ class LinkParser(HTMLParser):
     def handle_data(self, data):
         # Strip text that is unusable remove any new line characters (replace with space)
         self.innerText += Excl.stripHtml(data)
-        Crawler.animate_work(delay=0)
 
     def getLinks(self, url):
         self.links = []
+        self.innerText = ""
         self.baseUrl = url
-        self.crawler.cprint(steps=[0], url=url)
 
         with urlopen(url) as response:
             if LinkParser.re_type_html.match(response.getheader('Content-Type')) is not None:
                 htmlBytes = response.read()
                 self.htmlString = htmlBytes.decode("utf-8")
-                self.innerText = ""
-                self.crawler.cprint(steps=[1], url=url)
                 self.feed(self.htmlString)
                 response.close()
                 return self.innerText, self.links
             else:
                 response.close()
                 return "",[]
+
+def parse_url(url):
+    parser = LinkParser()
+    inner_text, links = parser.getLinks(url)
+    return (url, inner_text, links)
+
+class TaskManager:
+
+    def __init__(self, max_tasks, workers):
+        self.max_tasks = max_tasks
+        self.tasks = []
+        self.pool = Pool(workers)
+
+    def any_ready(self):
+        for t in self.tasks:
+            if (t.ready()):
+                return t.ready()
+        return False
+
+    def get_ready_task(self):
+        for it in range(len(self.tasks)):
+            if (self.tasks[it].ready()):
+                t = self.tasks[it]
+                self.tasks = self.tasks[:it] + self.tasks[it+1:]
+                return t
+        return None
+    
+    def full(self):
+        return len(self.tasks) >= self.max_tasks
+    def empty(self):
+        return len(self.tasks) is 0
+    
+    def put(self, func, args_tuple):
+        if (len(self.tasks) < self.max_tasks):
+            async_result = self.pool.apply_async(func, [args_tuple])
+            self.tasks.append(async_result)
+            return async_result
+        return None
 
 class Crawler():
 
@@ -177,6 +221,7 @@ class Crawler():
         self.state_file = state_file
         self.pagesToVisit = []
         self.maxPages = maxPages
+        self.keyboard_interrupt = False
 
         try:
             with open(state_file, 'rb') as file:
@@ -201,6 +246,97 @@ class Crawler():
         except IOError as e:
             print('A csv has not yet been created. Did not load visited pages from: ', self.write_to, e)
         print('Crawler visited ', len(self.pagesVisited), 'pages')
+
+    '''
+    Start crawling wikipedia. Exit with CTRL+C (for Linux and Windows).
+    '''
+    def crawl(self, maxPages=None, write_html_to=None):
+
+        num_workers = os.cpu_count() - 2
+        if (num_workers is None): num_workers = 2
+
+        tasks = TaskManager(max_tasks=ceil(num_workers * 1.5) + 2, workers=num_workers)
+
+        if (write_html_to is None):
+            write_html_to = self.write_to
+        if (maxPages is None):
+            maxPages = self.maxPages
+        
+        csvAppender = CsvAppender(write_html_to)
+        do_save_state = 0
+
+        while (not tasks.empty() or (len(self.pagesToVisit) > 0 and not self.keyboard_interrupt)):
+            try:
+                # push next url if pending results list is free
+                if (not self.keyboard_interrupt and not tasks.full() and len(self.pagesToVisit) > 0):
+                    Crawler.animate_work(True)
+                    url = self.pagesToVisit[0]
+                    self.pagesToVisit = self.pagesToVisit[1:]
+                    tasks.put(parse_url, url)
+
+                Crawler.animate_work(True)
+                if (self.keyboard_interrupt):
+                    self.cprint(custom='')
+
+                # pull a result if tasks not empty and a task is ready
+                if (not tasks.empty() and tasks.any_ready()):
+                    async_result = tasks.get_ready_task()
+                    try:
+                        url, innerText, links = async_result.get()
+                    except Exception as e:
+                        self.cprint(error=e, url=url, end='\n')
+                        continue
+                    
+                    self.cprint(steps=[2], url=url)
+
+                    links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.match(l) is not None and Crawler.re_is_not_article.search(l) is None])
+                    
+                    Crawler.animate_work(True)
+                    ignored = False
+                    # append html to file
+                    if (not url is None and not url in self.pagesVisited):
+                        Crawler.animate_work(True)
+                        self.cprint(steps=[3], url=url)
+                        appended = csvAppender.append(url, innerText)
+                        Crawler.animate_work(True)
+                        if appended:
+                            self.cprint(steps=[4], url=url)
+                        else:
+                            self.cprint(steps=[5], url=url, end='\n')
+                            ignored = True
+                    else:
+                        self.cprint(steps=[5], url=url, end='\n')
+                        ignored = True
+
+                    Crawler.animate_work(True)
+
+                    # Add the pages that we should visit next to the end of our collection
+                    # of pages to visit:
+                    random.shuffle(links)
+                    Crawler.animate_work(True)
+
+                    weight = 3
+                    lang = CsvAppender.getLang(url)
+                    if (lang is 'G' or lang is 'E'): weight = 4
+                    
+                    links = links[:weight]
+                    self.pagesToVisit = self.pagesToVisit + links
+                    Crawler.animate_work(True)
+                    random.shuffle(self.pagesToVisit)
+                    self.pagesToVisit = self.pagesToVisit[:200]
+                    Crawler.animate_work(True)
+                    
+                    if (not ignored): self.pagesVisited.append(url)
+                    
+                    Crawler.animate_work(True)
+        
+            except KeyboardInterrupt as ki:
+                self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
+                self.keyboard_interrupt = True
+
+        # save state before exiting
+        self.saveState()
+        print('\n\n')
         
     '''
     Mapping state to different versions
@@ -275,6 +411,7 @@ class Crawler():
             print_string = ' {' + Crawler.anim[Crawler.anim_idx % len(Crawler.anim)] + '}'
             if (newAnim or force):
                 print(print_string, end='\r', flush=True)
+                # print(print_string, end='\r', flush=True)
         return print_string
 
     '''
@@ -294,17 +431,28 @@ class Crawler():
         'State SAVE   ' # 7
     ]
 
+    def handle_keyboard_interrupt(self, sig, frame):
+        self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
+        self.keyboard_interrupt = True
+
     def cprint(self, steps=None, url=None, error=None, end=None, flush=True, custom=None):
         print('\r', end='\r')
+        
         print_string = ''
+
         if (not custom is None):
-            print_string = custom
+            print_string += Crawler.animate_work() + ' '
+            if (self.keyboard_interrupt):
+                    print_string += ' (waiting for tasks to finish) - '
+            print_string += custom
         else:
             if (not error is None):
                 print_string = str(error) + ': '
             else:
                 print_string = Crawler.animate_work() + ' '
                 print_string += str(len(self.pagesVisited) + 1).rjust(5) + ' - '
+                if (self.keyboard_interrupt):
+                    print_string += ' (waiting for tasks to finish) - '
 
         if (not steps is None):
             for s in steps:
@@ -325,87 +473,14 @@ class Crawler():
         print(print_string, end=end or '\r', flush=flush)
 
         return print_string
-        
-
-    '''
-    Start crawling wikipedia. Exit with CTRL+C (for Linux and Windows).
-    '''
-    def crawl(self, maxPages=None, write_html_to=None):
-        if (write_html_to is None):
-            write_html_to = self.write_to
-        if (maxPages is None):
-            maxPages = self.maxPages
-        
-        csvAppender = CsvAppender(write_html_to)
-        do_save_state = 0
-        initial = True
-
-        # The main loop. Create a LinkParser and get all the links on the page.
-        try:
-            while len(self.pagesVisited) < self.maxPages and self.pagesToVisit != []:
-                # Start from the beginning of our collection of pages to visit:
-                url = self.pagesToVisit[0]
-                self.pagesToVisit = self.pagesToVisit[1:]
-                
-                do_save_state = (do_save_state + 1) % 50
-                if (do_save_state == 0):
-                    self.saveState()
-
-                if (not url in self.pagesVisited or initial):
-                    # self.cprint(steps=[1], url=url)
-                    parser = LinkParser(self)
-
-                    try:
-                        innerText, links = parser.getLinks(url)
-                    except error.HTTPError as he:
-                        self.cprint(error=he, url=url, end='\n')
-                        continue
-                    except error.URLError as urle:
-                        self.cprint(error=urle, url=url, end='\n')
-                        continue
-                    except UnicodeEncodeError as uee:
-                        self.cprint(error=uee, url=url, end='\n')
-                        continue
-
-                    self.cprint(steps=[2], url=url)
-                    links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.match(l) is not None and Crawler.re_is_not_article.search(l) is None])
-                    Crawler.animate_work(True)
-                    # append html to file
-                    if (not url is None and not url in self.pagesVisited):
-                        self.cprint(steps=[3], url=url)
-                        appended = csvAppender.append(url, innerText)
-                        if appended:
-                            self.cprint(steps=[4], url=url)
-                            initial = False
-                        else:
-                            self.cprint(steps=[5], url=url, end='\n')
-                    else:
-                        self.cprint(steps=[5], url=url, end='\n')
-
-                    Crawler.animate_work(True)
-                    # Add the pages that we should visit next to the end of our collection
-                    # of pages to visit:
-                    random.shuffle(links)
-                    Crawler.animate_work(True)
-                    weight = 3
-                    lang = CsvAppender.getLang(url)
-                    if (lang is 'G' or lang is 'E'):
-                        weight = 4
-                    links = links[:weight]
-                    self.pagesToVisit = self.pagesToVisit + links
-                    Crawler.animate_work(True)
-                    random.shuffle(self.pagesToVisit)
-                    self.pagesToVisit = self.pagesToVisit[:200]
-                    self.pagesVisited.append(url)
-        
-        except KeyboardInterrupt as ki:
-            self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
-            self.saveState()
-
-
-
 
 crawler = Crawler(resume=True, write_html_to='Random_Wiki_Pages.csv')
+
+def signal_handler(sig, frame):
+        crawler.handle_keyboard_interrupt(sig, frame)
+
+signal.signal(signal.SIGINT, signal_handler)
+
 crawler.appendUrl('https://en.wikipedia.org/wiki/Main_Page')
 crawler.appendUrl('https://simple.wikipedia.org/wiki/Main_Page')
 crawler.appendUrl('https://de.wikipedia.org/wiki/Wikipedia:Hauptseite')
@@ -425,4 +500,3 @@ crawler.appendUrl('https://it.wikipedia.org/wiki/Pagina_principale')
 crawler.appendUrl('https://ms.wikipedia.org/wiki/Laman_Utama')
 crawler.appendUrl('https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal')
 crawler.crawl()
-

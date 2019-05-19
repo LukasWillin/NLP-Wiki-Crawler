@@ -1,0 +1,104 @@
+class WorkerPool:
+    
+    def __init__(self, crawler, num_processes):
+        print('shitshitshit2')
+        self.pool = Pool(processes=num_processes)
+        self.lock = Lock()
+        self.tasks = JoinableQueue(num_processes + int(ceil(num_processes*1.2)))
+        self.results = Queue(num_processes + int(ceil(num_processes*1.2)))
+        self.crawler = crawler
+        self.pool.map_async(func=Worker, iterable=[WorkerArgs(crawler=self.crawler, tasks=self.tasks, results=self.results, lock=self.lock) for i in range(num_processes)])
+        # for _ in range(num_processes):
+        #     Worker(self.crawler, self.tasks, self.results, lock=self.lock)
+
+    def add_task(self, func, *args, **kargs):
+        """ Add a task to the queue """
+        self.tasks.put((func, args, kargs))
+
+    def map(self, func, args_list):
+        """ Add a list of tasks to the queue """
+        for args in args_list:
+            self.add_task(func, args)
+
+    def wait_completion(self):
+        """ Wait for completion of all the tasks in the queue """
+        self.tasks.join()
+        self.pool.close()
+        self.pool.join()
+
+class Signal:
+    def __init__(self, name, to_id, value=None):
+        self._value = value
+        self._to_id = to_id
+        self._name = name
+    def get_value(self):
+        return self._value
+    def get_name(self):
+        return self._name
+    def get_id(self):
+        return self._to_id
+    def send(value):
+        self._value = value
+
+class WorkerArgs:
+    def __init__(self, crawler, tasks, results, lock, sig_finish):
+        self.lock = lock
+        self.crawler = crawler
+        self.tasks = tasks
+        self.results = results
+        self.sig_finish = sig_finish
+
+def Worker(wargs):
+    while not wargs.tasks.empty() or wargs.sig_finish.get_value() is False:
+        time.sleep(.2) # make sure we are not buisy waiting all the time
+        wargs.lock.acquire()
+        func, fargs, fkargs = wargs.tasks.get()
+        wargs.lock.acquire()
+        try:
+            url = fargs[0]
+            result = func(*fargs, **fkargs)
+            wargs.lock.acquire()
+            wargs.results.put(result)
+            wargs.lock.release()
+        except Exception as e:
+            # An exception happened in this thread
+            wargs.lock.acquire()
+            wargs.crawler.cprint(error=e, url=url, end='\n')
+            wargs.lock.release()
+        finally:
+            # Mark this task as done, whether an exception happened or not
+            wargs.lock.acquire()
+            wargs.tasks.task_done()
+            wargs.lock.release()
+
+# class Worker:
+#     """ Thread executing tasks from a given tasks queue """
+#     def __init__(self, crawler, tasks, results, lock=Lock()):
+#         super().__init__()
+#         self.lock = lock
+#         self.crawler = crawler
+#         self.tasks = tasks
+#         self.results = results
+#         self.daemon = True
+#         self.start()
+
+#     def run(self):
+#         while True:
+#             time.sleep(.2) # make sure we are not buisy waiting all the time
+#             func, args, kargs = self.tasks.get()
+#             try:
+#                 url = args[0]
+#                 result = func(*args, **kargs)
+#                 self.lock.acquire()
+#                 self.results.put(result)
+#                 self.lock.release()
+#             except Exception as e:
+#                 # An exception happened in this thread
+#                 self.lock.acquire()
+#                 self.crawler.cprint(error=e, url=url, end='\n')
+#                 self.lock.release()
+#             finally:
+#                 # Mark this task as done, whether an exception happened or not
+#                 self.lock.acquire()
+#                 self.tasks.task_done()
+#                 self.lock.release()
