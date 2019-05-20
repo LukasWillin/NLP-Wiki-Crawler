@@ -190,9 +190,9 @@ class TaskManager:
     def get_ready_task(self):
         for it in range(len(self.tasks)):
             if (self.tasks[it].ready()):
-                t = self.tasks[it]
-                self.tasks = self.tasks[:it] + self.tasks[it+1:]
-                return t
+                task = self.tasks[it]
+                self.tasks = list(filter(lambda t: not t is task, self.tasks))
+                return task
         return None
     
     def full(self):
@@ -222,19 +222,22 @@ class Crawler():
         self.pagesToVisit = []
         self.maxPages = maxPages
         self.keyboard_interrupt = False
+        self.trash_pages = set([])
 
         try:
             with open(state_file, 'rb') as file:
-                state = Crawler.mapState(pickle.load(file), '3')
+                state = Crawler.mapState(pickle.load(file), '4')
                 if (resume):
-                    self.pagesToVisit = state['d']['pages-to-visit']
+                    self.pagesToVisit = state['d']['pages_to_visit']
+                self.trash_pages = state['d']['trash_pages']
                 file.close()
         except:
             try: # Old standard State file 
                 with open('Spider.state', 'rb') as file:
-                    state = Crawler.mapState(pickle.load(file), '3')
+                    state = Crawler.mapState(pickle.load(file), '4')
                     if (resume):
-                        self.pagesToVisit = state['d']['pages-to-visit']
+                        self.pagesToVisit = state['d']['pages_to_visit']
+                    self.trash_pages = state['d']['trash_pages']
                     file.close()
             except:
                 print('Did not load state from: ', state_file)
@@ -254,7 +257,6 @@ class Crawler():
 
         num_workers = os.cpu_count() - 2
         if (num_workers is None): num_workers = 2
-
         tasks = TaskManager(max_tasks=ceil(num_workers * 1.5) + 2, workers=num_workers)
 
         if (write_html_to is None):
@@ -289,24 +291,25 @@ class Crawler():
                     
                     self.cprint(steps=[2], url=url)
 
-                    links = list([l for l in links if (not l in self.pagesVisited) and Crawler.re_valid_url.match(l) is not None and Crawler.re_is_not_article.search(l) is None])
+                    links = list([l for l in links if (not l in self.pagesVisited) and (not l in self.pagesToVisit) and (not l in self.trash_pages) and Crawler.re_valid_url.match(l) is not None and Crawler.re_is_not_article.search(l) is None])
                     
-                    Crawler.animate_work(True)
-                    ignored = False
+                    Crawler.animate_work(True, times=2)
+
                     # append html to file
-                    if (not url is None and not url in self.pagesVisited):
+                    if (not url is None and not url in self.pagesVisited and not url in self.trash_pages):
                         Crawler.animate_work(True)
                         self.cprint(steps=[3], url=url)
                         appended = csvAppender.append(url, innerText)
-                        Crawler.animate_work(True)
+                        Crawler.animate_work(True, times=2)
                         if appended:
+                            self.pagesVisited.append(url)
                             self.cprint(steps=[4], url=url)
                         else:
                             self.cprint(steps=[5], url=url, end='\n')
-                            ignored = True
+                            self.trash_pages.add(url)
                     else:
                         self.cprint(steps=[5], url=url, end='\n')
-                        ignored = True
+                        self.trash_pages.add(url)
 
                     Crawler.animate_work(True)
 
@@ -325,10 +328,6 @@ class Crawler():
                     random.shuffle(self.pagesToVisit)
                     self.pagesToVisit = self.pagesToVisit[:200]
                     Crawler.animate_work(True)
-                    
-                    if (not ignored): self.pagesVisited.append(url)
-                    
-                    Crawler.animate_work(True)
         
             except KeyboardInterrupt as ki:
                 self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
@@ -343,9 +342,14 @@ class Crawler():
     Mapping down may lead to loss of state variables
     '''
     def mapState(src, targetVersion):
+
         srcVersion = src['v']
+
+        print('map state version ' + str(srcVersion) + ' to ' + str(targetVersion))
+
         pagesVisited = []
         pagesToVisit = []
+        trash_pages = set([])
 
         if (srcVersion is targetVersion):
             return src
@@ -357,6 +361,9 @@ class Crawler():
             pagesToVisit = src['d']['tv']
         if (srcVersion is '3'):
             pagesToVisit = src['d']['pages-to-visit']
+        if (srcVersion is '4'):
+            pagesToVisit = src['d']['pages_to_visit']
+            trash_pages = src['d']['trash_pages']
         
         if (targetVersion is '1'):
             return {
@@ -378,6 +385,14 @@ class Crawler():
                     'pages-to-visit': pagesToVisit
                 }
             }
+        if (targetVersion is '4'):
+            return {
+                'v': '4',
+                'd': {
+                    'pages_to_visit': pagesToVisit,
+                    'trash_pages': set(trash_pages)
+                }
+            }
         
         return src
         
@@ -388,9 +403,10 @@ class Crawler():
         try:
             with open(self.state_file, 'wb') as file:
                 pickle.dump({
-                    'v': '3',
+                    'v': '4',
                     'd': {
-                        'pages-to-visit': self.pagesToVisit
+                        'pages_to_visit': self.pagesToVisit,
+                        'trash_pages': self.trash_pages
                     }
                 }, file)
                 file.close()
@@ -400,7 +416,7 @@ class Crawler():
     '''
     Creates and animation like {/} > {–} > {\} > {|}
     '''
-    def animate_work(force=False, times=1, delay=.1):
+    def animate_work(force=False, times=1, delay=.14):
         Crawler.anim_calls = (Crawler.anim_calls + 1) % 50
         newAnim = Crawler.anim_calls is 0
         for i in range(times):
