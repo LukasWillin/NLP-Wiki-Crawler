@@ -75,13 +75,13 @@ class Excl:
         return Excl.re_rem_space.sub(' ', text)
 
 Excl.add_to_exclusion_list(r'autocollapse statecollapsed wikipedia Wikipedia wpsearch QUERY TERMS ShortSearch document documentElement className most interwikis Page document documentElement className replace      s client nojs  s       client js        titlePunishmentoldid window RLQwindow RLQ    push function   mw config set   wgCanonicalNamespace      wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId             wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups       wgCategories ')
-Excl.add_to_exclusion_list(r'editWarning wgStructuredChangeFilters Expand Gadget usage statistics Graph sandbox List wikis system sandbox Try hieroglyph markup View interwiki Wiki sets Redirecting special mediawiki action edit collapsibleFooter href  site   mediawiki page startup   mediawiki page ready   mediawiki searchSuggest   ext charinsert   ext gadget teahouse   ext gadget ReferenceTooltips   ext gadget watchlist notice   ext gadget DRN wizard   ext gadget charinsert   ext gadget refToolbar   ext gadget extra toolbar buttons   ext gadget switcher   ext centralauth centralautologin   ext CodeMirror   mmv head   mmv bootstrap autostart   ext popups   ext visualEditor desktopArticleTarget init   ext visualEditor targetLoader   ext eventLogging   ext wikimediaEvents   ext navigationTiming   ext uls compactlinks   ext uls interface   ext quicksurveys init   ext centralNotice geoIP   skins vector js  mw loader load RLPAGEMODULES')
-Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl herit inherit inherit inherit cs hidden error cs visible error cs maint aa cs subscription cs registration cs format cs kern cs kern wl cs kern cs kern wl pageneeded wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice UTC  wgCanonicalSpecialPageName  false  wgNamespaceNumber     wgPageName   P value   wgTitle   P value   wgCurRevisionId Wikimedia Commons Wikidata index php Creative Commons Attribution ShareAlike License         wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups td tr tbody table      wgCategories   Articles with short description')
-Excl.add_to_exclusion_list(r'wgRelevantPageName wgBackendResponseTime wgHostname wgRelevantArticleId wgSiteNoticeId w titleWikipedia Log Namespaces dismissableSiteNotice cqd ng required helpers helplink htmlform ooui htmlform DateInputWidget userSuggest htmlform htmlform ooui UserInputWidget DateInputWidget thanks corethank   wgRequestId  XNmm QpAIEIAAA SGIAAABD  wgCSPNonce  wgIsProbablyEditable  wgRelevantPageIsProbablyEditable  wgRestrictionEdit  wgRestrictionMove  wgMediaViewerOnClick  wgMediaViewerEnabledByDefault  wgPopupsReferencePreviews  wgPopupsConflictsWithNavPopupGadget  wgVisualEditor  pageLanguageCode  en  pageLanguageDir  ltr  pageVariantFallbacks  en  wgMFDisplayWikibaseDescriptions  search  nearby    tagline   wgRelatedArticles  wgRelatedArticlesUseCirrusSearch  wgRelatedArticlesOnlyUseCirrusSearch  wgWMESchemaEditAttemptStepOversample  wgPoweredByHHVM  wgULSCurrentAutonym  English  wgNoticeProject   wgCentralNoticeCookiesToDelete  wgCentralNoticeCategoriesUsingLegacy  Fundraising  fundraising  wgWikibaseItemId  Q     wgCentralAuthMobileDomain  wgEditSubmitButtonLabelPublish    state   styles    globalCssJs user styles    globalCssJs styles    styles   noscript   user styles    globalCssJs user    globalCssJs    user   user options   user tokens  loading  cite styles    math styles    legacy shared    legacy commonPrint    toc styles   wikibase      noscript    interlanguage    wikimediaBadges    d styles    skinning     styles     implement user tokens tffind  jQuery require module  displaystyle X displaystyle  alpha Leftrightarrow wgPageParseReport limitreport cputime  walltime  ppvisitednodes  limit  ppgeneratednodes  limit  postexpandincludesize  limit  templateargumentsize limit  expansiondepth  limit  expensivefunctioncount  limit unstrip depth  limit  unstrip size  limit  entityaccesscount  limit timingprofile   Templat References    total   Templat Cite journal   Templat Main other scribunto limitreport timeusage   limit   limitreport memusage   limit  cachereport origin timestamp  ttl  transientcontent      context  https  schema  type  Article  name  Nilai url  https  wiki Nilai sameAs  http  www wikidata  entity  mainEntity  nomin  user tokens  editToken     patrolToken     watchToken     csrfToken        cite ux enhancements  math scripts         toc')
+Excl.add_to_exclusion_list(r'editWarning wgStructuredChangeFilters Expand Gadget usage statistics Graph sandbox List wikis system sandbox Try hieroglyph markup View interwiki Wiki sets Redirecting special mediawiki action edit collapsibleFooter href  site   mediawiki page startup   mediawiki page ready   mediawiki searchSuggest    charinsert    gadget teahouse gadget ReferenceTooltips gadget watchlist notice gadget DRN wizard gadget charinsert gadget refToolbar gadget extra toolbar buttons gadget switcher centralauth centralautologin CodeMirror   mmv head   mmv bootstrap autostart popups visualEditor desktopArticleTarget init visualEditor targetLoader    eventLogging wikimediaEvents navigationTiming    uls compactlinks    uls interface    quicksurveys init    centralNotice geoIP   skins vector js  mw loader load RLPAGEMODULES')
+Excl.add_to_exclusion_list(r'mw config set wgInternalRedirectTargetUrl herit inherit inherit inherit cs hidden error cs visible error cs maint aa cs subscription cs registration cs format cs kern cs kern wl cs kern cs kern wl pageneeded wgCanonicalNamespace wgRedirectedFrom Sitenotice title Hjlp sitenotice UTC  wgCanonicalSpecialPageName  false  wgNamespaceNumber    ext wgPageName   P value   wgTitle   P value   wgCurRevisionId Wikimedia Commons Wikidata index php Creative Commons Attribution ShareAlike License         wgRevisionId             wgArticleId          wgIsArticle  true  wgIsRedirect  false  wgAction   view   wgUserName  null  wgUserGroups td tr tbody table      wgCategories   Articles with short description')
+Excl.add_to_exclusion_list(r'wgRelevantPageName wgBackendResponseTime wgHostname wgRelevantArticleId wgSiteNoticeId w titleWikipedia Log Namespaces dismissableSiteNotice cqd ng required helpers helplink htmlform ooui htmlform DateInputWidget userSuggest htmlform htmlform ooui UserInputWidget DateInputWidget thanks corethank   wgRequestId wgCSPNonce  wgIsProbablyEditable  wgRelevantPageIsProbablyEditable  wgRestrictionEdit  wgRestrictionMove  wgMediaViewerOnClick  wgMediaViewerEnabledByDefault  wgPopupsReferencePreviews  wgPopupsConflictsWithNavPopupGadget  wgVisualEditor  pageLanguageCode  en  pageLanguageDir  ltr  pageVariantFallbacks  en  wgMFDisplayWikibaseDescriptions  search  nearby    tagline   wgRelatedArticles  wgRelatedArticlesUseCirrusSearch  wgRelatedArticlesOnlyUseCirrusSearch  wgWMESchemaEditAttemptStepOversample  wgPoweredByHHVM  wgULSCurrentAutonym  English  wgNoticeProject   wgCentralNoticeCookiesToDelete  wgCentralNoticeCategoriesUsingLegacy  Fundraising  fundraising  wgWikibaseItemId  Q     wgCentralAuthMobileDomain  wgEditSubmitButtonLabelPublish    state   styles    globalCssJs user styles    globalCssJs styles    styles   noscript   user styles    globalCssJs user    globalCssJs    user   user options   user tokens  loading  cite styles    math styles    legacy shared    legacy commonPrint    toc styles   wikibase      noscript    interlanguage    wikimediaBadges    d styles    skinning     styles     implement user tokens tffind  jQuery require module  displaystyle X displaystyle  alpha Leftrightarrow wgPageParseReport limitreport cputime  walltime  ppvisitednodes  limit  ppgeneratednodes  limit  postexpandincludesize  limit  templateargumentsize limit  expansiondepth  limit  expensivefunctioncount  limit unstrip depth  limit  unstrip size  limit  entityaccesscount  limit timingprofile   Templat References    total   Templat Cite journal   Templat Main other scribunto limitreport timeusage   limit   limitreport memusage   limit  cachereport origin timestamp  ttl  transientcontent      context  https  schema  type  Article  name  Nilai url  https  wiki Nilai sameAs  http  www wikidata  entity  mainEntity  nomin  user tokens  editToken     patrolToken     watchToken     csrfToken        cite ux enhancements  math scripts         toc')
 Excl.add_to_exclusion_list(r'parser output RLSTATE plainlist ul list main wgIsMainPage tmulti thumbinner display flex flex direction column autoconfirmed sysop wgCoordinates parser output tmulti trow display flex flex direction row clear left flex wrap wrap width  box sizing border box  parser output tmulti tsingle margin px float left  parser output tmulti theader clear both font weight bold text align center align self center background color transparent width  parser output tmulti thumbcaption text align left background color transparent  parser output tmulti text align left text align left  parser output tmulti text align right text align right  parser output tmulti text align center text align center all and max width px parser output tmulti thumbinner width  important box sizing border box max width none important align items center  parser output tmulti trow justify content center  parser output tmulti tsingle float none important max width  important box sizing border box text align center  parser output tmulti thumbcaption text align center')
-Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort XNjswwpAIEIAAIU iM AAACN LCCN identifiers articles VIAF identifiers articles WorldCat VIAF identifiers Book Compare export  wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      categoryPage categoryTree tmh thumbnail xs k af categoryTree MediaWikiPlayer PopUpMediaTransform startUp flaggedRevs advanced classNamedocument  Collider Detector at Fermilab   XNnpDgpAMFQAAJ dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch Line data file data file td                    flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
-Excl.add_to_exclusion_list(r'templates January span dotted cursor cs ws c Wikisource logo Wikisource logo no repeat wgRelevantUserName bibcoded see bibcode Bibcode February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template User Talk Pages XNmiKwpAMFoAAHP gAAABG Template User Talk Pages From the free encyclopedia Jump to navigation Jump to v e User Talk Pages User talk pages Usertalkpage User talk Usertalkback Userwhisperback Talk header preload Message Talkpagecool User notification preference Notification preferences NP Usertalkpage rounded User talk rules User talk top Usercomment Usertalkconcise Talk header User talk header Usertalksuper Usertalkpage blue User mbox Category Template documentation Initial visibility currently defaults to autocollapse To this template initial visibility the parameter may be used statecollapsed User Talk Pages')
-Excl.add_to_exclusion_list(r'Template Csmall Multiple issues Statistics Template Template Multiple issues Multiple issues template protected templates using small message boxes Exclude in print message templates message templates missing parameters Templates used by Twinkle Templates used by AutoWikiBrowser Lua based templates Templates using TemplateData templates Templates that add tracking category January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template Multiple issues XNnEWApAIC AAKhyJIkAAAAA templateeditor templateeditor templateData templateData images inputBox ui input ui checkbox oojs ui core oojs ui indicators oojs ui textures widgets oojs ui icons oojs ui icons alerts oojs ui icons interactions jquery makeCollapsible ui jquery tablesorter jquery makeCollapsible Template Multiple issues From the free encyclopedia Jump to navigation Jump to This article has multiple issues Please help improve it or discuss')
+Excl.add_to_exclusion_list(r'wgBreakFrames wgMonthNamesShort iM AAACN LCCN identifiers articles VIAF identifiers articles WorldCat VIAF identifiers Book Compare export  wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch                   flaggedRevs basic   wzrrbt   variant  de          editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      categoryPage categoryTree tmh thumbnail xs k af categoryTree MediaWikiPlayer PopUpMediaTransform startUp flaggedRevs advanced classNamedocument  Collider Detector at Fermilab dO wAAAAK    wgFlaggedRevsParams tags accuracy levels  quality  pristine wgStableRevisionId    de  de     Deutsch Line data file data file td                    flaggedRevs basic   wzrrbt   variant  de            editMenus  WikiMiniAtlas  OpenStreetMap  CommonsDirekt      startUp flaggedRevs advanced var nodedocument getElementById  dismissablenotice anonplace  if node node outerHTML u  Cdiv class  dismissable u  E u  Cdiv class  dismissable close  u  E u  Ca tabindex role button  u  Ezarrar u  C a u  E u  C div u  E u  Cdiv class  dismissable body  u  E u  Cdiv id localNotice  lang ast  dir  u  E u  Ctable style  class noprint plainlinks ambox ambox u  E n u  Ctbody u  E u  Ctr u  E n u  Ctd class ambox image  u  E n u  Cdiv style  u  E u  Cimg alt  src upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png  decoding async height  srcset upload wikimedia org commons thumb a ac Noun Project maintenance icon cc svg Noun Project maintenance icon cc svg png x wgPageContentLanguage  de  wgPageContentModel  wikitext  wgSeparatorTransformTable  t t wgDigitTransformTable  wgDefaultDateFormat  dmy  wgMonthNames')
+Excl.add_to_exclusion_list(r'templates January span dotted cursor cs ws c Wikisource logo Wikisource logo no repeat wgRelevantUserName bibcoded see bibcode Bibcode February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template User Talk Pages XNmiKwpAMFoAAHP gAAABG Template User Talk Pages From the free encyclopedia Jump to navigation Jump to v e User Talk Pages User talk pages Usertalkpage User talk Usertalkback Userwhisperback Talk header preload Message Talkpagecool User notification preference Notification preferences NP Usertalkpage rounded User talk rules User talk top Usercomment Usertalkconcise Talk header User talk header Usertalksuper Usertalkpage blue User mbox Category Template documentation Initial visibility currently defaults to To this template initial visibility the parameter may be used statecollapsed User Talk Pages')
+Excl.add_to_exclusion_list(r'Template Csmall Multiple issues Statistics Template Template Multiple issues Multiple issues template protected templates using small message boxes Exclude in print message templates message templates missing parameters Templates used by Twinkle Templates used by AutoWikiBrowser Lua based templates Templates using TemplateData templates Templates that add tracking category January February March April May June July August September October November December Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec Template Multiple issues templateeditor templateeditor templateData templateData images inputBox ui input ui checkbox oojs ui core oojs ui indicators oojs ui textures widgets oojs ui icons oojs ui icons alerts oojs ui icons interactions jquery makeCollapsible ui jquery tablesorter jquery makeCollapsible Template Multiple issues From the free encyclopedia Jump to navigation Jump to This article has multiple issues Please help improve it or discuss')
 Excl.add_to_exclusion_list(r'shortcutboxplain solid aaa fff em padding em em em em shortcutlist inline block bottom solid aaa bottom em normal shortcutanchordiv position relative top em Shortcuts WP REFB WP REFBEGIN WP REFSTAR ExternalData service geomask maps geoshape getgeojson idsQ properties geomask marker symbol soccer stroke fill opacity marker FF fill FFFFE ExternalData service geoline maps geoline getgeojson idsQ properties geoline marker symbol soccer stroke stroke FF marker FF features Feature geometry')
 Excl.add_to_exclusion_list(r'Subcategories subcategories Change links was last changed on Text is available under Creative Commons Attribution Share Alike License GFDL additional terms apply See Terms of Use for details Privacy policy About Disclaimers Developers Cookie statement Mobile About Disclaimers Contact Developers Cookie statement Mobile Lang es Reflist web Text is available under Creative Commons Attribution ShareAlike License additional terms apply By you agree Terms of Use Privacy Policy is registered trademark of Wikimedia Foundation Inc non profit organization Privacy policy About Disclaimers Contact Developers Cookie statement Mobile Infobox settlement Infobox Coord Infobox settlement areadisp Infobox settle Hidden categories Noindexed Navigation menu Personal tools Not logged')
 Excl.add_to_exclusion_list(r'HDI Area Database Global Data Lab hdi globaldatalab Retrieved citation citation q quotes citation lock Lock green Lock green citation lock limited citation lock Lock gray Lock gray citation lock Lock red Lock red code code')
@@ -89,15 +89,15 @@ Excl.add_to_exclusion_list(r'Wanted files files Media statistics Differences Per
 Excl.add_to_exclusion_list(r'b ISO RLCONF posterDirected retrieved b ISO retrieved b ISO retrieved b ISO retrieved b ISO retrieved featured mySandbox AdvancedSiteNotices datePublished T Z dateModified T Z Timezones B B author Organization Contributors projects publisher Organization ImageObject static wmf')
 Excl.add_to_exclusion_list(r'deprecated syntax pygments Module Check unknown Module history purge avoid large scale disruption unnecessary server any changes should first tested modules testcases')
 Excl.add_to_exclusion_list(r'feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic ene feb mar abr jun jul ago sep oct nov dic jueves mayo mayo Lu Ma Mi Ju Vi Sa Do')
-Excl.add_to_exclusion_list(r'nl januari februari maart april mei juni juli augustus september oktober november december jan feb mrt apr mei jun jul aug sep okt nov dec mei XN ECQpAMFYAAEo XWgAAACJ nl nl Nederlands Direct ProtectionTemplates InterProjectLinks ')
-Excl.add_to_exclusion_list(r'Januar Februar März Mai Juni Juli Oktober Dezember Mär Mai Okt Dez XNv QApAAD AADobidEAAACR er er er er er er er Januar Kw Mo Di Mi Do Fr Sa So Februar Kw Mo Di Mi Do Fr Sa So März Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Mai Kw Mo Di Mi Do Fr Sa So Juni Kw Mo Di Mi Do Fr Sa So Juli Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Oktober Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Dezember Kw Mo Di Mi Do Fr Sa So')
-Excl.add_to_exclusion_list(r'XNu dgpAADgAAI Nq cAAACP nl nl nl januari februari maart april mei juni juli augustus september oktober november december jan feb mrt apr mei jun jul aug sep okt nov dec ')
+Excl.add_to_exclusion_list(r'nl januari februari maart april mei juni juli augustus september oktober november december jan feb mrt apr mei jun jul aug sep okt nov dec mei XN nl nl Nederlands Direct ProtectionTemplates InterProjectLinks ')
+Excl.add_to_exclusion_list(r'Januar Februar März Mai Juni Juli Oktober Dezember Mär Mai Okt Dez er er er er er er er Januar Kw Mo Di Mi Do Fr Sa So Februar Kw Mo Di Mi Do Fr Sa So März Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Mai Kw Mo Di Mi Do Fr Sa So Juni Kw Mo Di Mi Do Fr Sa So Juli Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Oktober Kw Mo Di Mi Do Fr Sa So Kw Mo Di Mi Do Fr Sa So Dezember Kw Mo Di Mi Do Fr Sa So')
+Excl.add_to_exclusion_list(r'XNu Nq cAAACP nl nl nl januari februari maart april mei juni juli augustus september oktober november december jan feb mrt apr mei jun jul aug sep okt nov dec ')
 Excl.add_to_exclusion_list(r'Januarie Februarie Maart Mei Junie Julie Augustus Oktober Desember Mrt Mei Sept Okt Des  Aa Ab Ac Ad Ae Af Ag Ah Ai Aj Ak Al Am An Ao Ap Aq Ar As At Au Av Aw Ax Ay Az Ba Bb Bc Bd Be Bf Bg Bh Bi Bj Bk Bl Bm Bn Bo Bp Bq Br Bs Bt Bu Bv Bw Bx Bz Cb Cc Cd Ce Cf Cg Ch Cj Ck Cl Cm Cn Co Cq Cr Cs Ct Cu Cv Cw Cx Cy Cz Da Db Dc Dd De Df Dg Dh Dj Dk Dl Dm Dn Dp Dq Dr Ds Dt Du Dv Dw Dx Dy Dz Ea Eb Ec Ed Ee Ef Eg Eh Ei Ej Ek El Em En Eo Ep Eq Er Es Et Eu Ev Ew Ex Ey Ez Fa Fb Fc Fd Fe Ff Fg Fh Fi Fj Fk Fl Fm Fn Fo Fp Fq Fs Ft Fu Fv Fw Fx Fy Fz Ga Gb Gc Gd Ge Gf Gg Gh Gi Gj Gk Gl Gm Gn Go Gp Gq Gr Gs Gt Gu Gv Gw Gx Gy Gz Ha Hb Hc Hd He Hf Hg Hh Hi Hj Hk Hl Hm Hn Ho Hp Hq Hr Hs Ht Hu Hv Hw Hx Hy Hz Ia Ib Ic Id Ie If Ig Ih Ii Ij Ik Il Im In Io Ip Iq Ir Is It Iu Iv Iw Ix Iy Iz Ja Jb Jc Jd Je Jf Jg Jh Ji Jj Jk Jl Jm Jn Jo Jp Jq Jr Js Jt Jv Jw Jx Jy Jz Ka Kb Kc Kd Ke Kf Kg Kh Ki Kj Kk Kl Km Kn Ko Kp Kq Kr Ks Kt Ku Kv Kx Ky Kz La Lb Lc Ld Le Lf Lg Lh Li Lj Lk Ll Lm Ln Lo Lp Lq Lr Ls Lt Lv Lw Lx Ly Lz Mb Mc Md Me Mf Mg Mh Mj Mk Ml Mm Mn Mp Mq Mr Ms Mt Mu Mv Mw Mx My Mz Na Nb Nc Nd Ne Nf Ng Nh Ni Nj Nk Nl Nm Nn No Np Nr Ns Nt Nu Nv Nw Nx Ny Nz Oa Ob Oc Od Oe Of Og Oh Oi Oj Ok Ol Om Oo Op Oq Or Os Ot Ou Ov Ow Ox Oy Oz Pa Pb Pc Pd Pe Pf Pg Ph Pi Pj Pk Pl Pm Pn Po Pp Pq Pr Ps Pt Pu Pv Pw Px Py Pz Qa Qb Qc Qd Qe Qf Qg Qh Qi Qj Qk Ql Qm Qn Qo Qp Qq Qr Qs Qt Qu Qv Qw Qx Qy Qz Ra Rb Rc Rd Re Rf Rg Rh Ri Rj Rk Rl Rm Rn Ro Rp Rq Rr Rs Rt Ru Rv Rw Rx Ry Rz Sb Sc Sd Se Sf Sg Sh Si Sj Sk Sl Sm Sn Sp Sq Sr Ss St Su Sv Sw Sx Sy Sz Ta Tb Tc Td Te Tf Tg Th Tj Tk Tl Tm Tn Tp Tq Tr Ts Tt Tu Tv Tw Tx Ty Tz Ua Ub Uc Ud Ue Uf Ug Uh Ui Uj Uk Ul Um Un Uo Up Uq Ur Us Ut Uu Uv Uw Ux Uy Uz Va Vb Vc Vd Ve Vf Vg Vh Vj Vk Vl Vm Vn Vo Vp Vq Vr Vs Vt Vu Vv Vw Vx Vy Vz Wa Wb Wc Wd We Wf Wg Wh Wi Wj Wk Wl Wm Wn Wo Wp Wq Wr Ws Wt Wu Wv Ww Wx Wy Wz Xa Xb Xc Xd Xe Xf Xg Xh Xi Xj Xk Xl Xm Xn Xo Xp Xq Xr Xs Xt Xu Xv Xw Xx Xy Xz Ya Yb Yc Yd Ye Yf Yg Yh Yi Yj Yk Yl Ym Yn Yo Yp Yq Yr Ys Yt Yu Yv Yw Yx Yy Yz Za Zb Zc Zd Ze Zf Zg Zh Zi Zj Zk Zl Zm Zn Zo Zp Zq Zr')
-Excl.add_to_exclusion_list(r'XN XJwpAAD AAJt wAAABS wq A F G H I J K M O R S U V W Y NavFrame NavFrame NavPic NavHead EAECF NavFrame after NavFrame NavFrame NavFrame NavFrame NavToggle')
+Excl.add_to_exclusion_list(r'XN AAJt wAAABS wq A F G H I J K M O R S U V W Y NavFrame NavFrame NavPic NavHead EAECF NavFrame after NavFrame NavFrame NavFrame NavFrame NavToggle')
 Excl.add_to_exclusion_list(r'Januar Februar März Mai Juni Juli Oktober Dezember Mär Mai Okt Dez Hauptseite XN tRA thin')
-Excl.add_to_exclusion_list(r'ApAADgAACcRVJgAAAAC fr fr damaging string fullCoverage filters likelygood label ores rcfilters damaging likelygood label ores rcfilters damaging likelygood desc cssClass changeslist damaging likelygood priority subset conflicts defaultHighlightColor maybebad label ores rcfilters damaging maybebad label ores rcfilters damaging maybebad desc cssClass changeslist damaging maybebad priority subset damaging likelybad damaging verylikelybad conflicts defaultHighlightColor likelybad label ores rcfilters damaging likelybad label ores rcfilters damaging likelybad desc low cssClass changeslist damaging likelybad priority subset damaging verylikelybad conflicts defaultHighlightColor verylikelybad label ores rcfilters damaging verylikelybad label ores rcfilters damaging verylikelybad desc cssClass changeslist damaging verylikelybad priority subset conflicts defaultHighlightColor priority conflicts changeType hidelog globalDescription ores rcfilters ores conflicts logactions contextDescription ores rcfilters damaging conflicts logactions changeType hideWikibase globalDescription rcfilters hide conflicts ores contextDescription rcfilters damaging conflicts hide whatsThisHeader ores rcfilters damaging whats whatsThisBody ores rcfilters damaging whats whatsThisUrl Special MyLanguage Help New filters review Quality Intent Filters whatsThisLinkText ores rcfilters whats ores rcfilters damaging separator default goodfaith string fullCoverage filters likelygood label ores rcfilters goodfaith good label ores rcfilters goodfaith good desc cssClass changeslist goodfaith good priority subset conflicts defaultHighlightColor maybebad label ores rcfilters goodfaith maybebad label ores rcfilters goodfaith maybebad desc cssClass changeslist goodfaith maybebad priority subset goodfaith likelybad goodfaith verylikelybad conflicts defaultHighlightColor likelybad label ores rcfilters goodfaith bad label ores rcfilters goodfaith bad desc low cssClass changeslist goodfaith bad priority subset goodfaith verylikelybad conflicts defaultHighlightColor verylikelybad label ores rcfilters goodfaith verylikelybad label ores rcfilters goodfaith verylikelybad desc cssClass changeslist goodfaith verylikelybad priority subset conflicts defaultHighlightColor priority conflicts changeType hidelog globalDescription ores rcfilters ores conflicts logactions contextDescription ores rcfilters goodfaith conflicts logactions changeType hideWikibase globalDescription rcfilters hide conflicts ores contextDescription rcfilters goodfaith conflicts hide whatsThisHeader ores rcfilters goodfaith whats whatsThisBody ores rcfilters goodfaith whats whatsThisUrl Special MyLanguage Help New filters review Quality Intent Filters whatsThisLinkText ores rcfilters whats ores rcfilters goodfaith separator default userExpLevel string fullCoverage filters unregistered label rcfilters experience level unregistered label rcfilters experience level unregistered cssClass changeslist unregistered priority subset conflicts defaultHighlightColor label rcfilters experience level label rcfilters experience level cssClass changeslist priority subset userExpLevel newcomer userExpLevel learner userExpLevel experienced conflicts defaultHighlightColor newcomer label rcfilters experience level newcomer label rcfilters experience level newcomer cssClass changeslist newcomer priority subset conflicts defaultHighlightColor learner label rcfilters experience level learner label rcfilters experience level learner cssClass changeslist learner priority subset conflicts defaultHighlightColor experienced label rcfilters experience level experienced label rcfilters experience level experienced fr janvier février mars avril mai juin juillet aot septembre octobre novembre décembre janv fév mars avr mai juin juill aot sept oct nov déc ')
+Excl.add_to_exclusion_list(r'fr fr damaging string fullCoverage filters likelygood label ores rcfilters damaging likelygood label ores rcfilters damaging likelygood desc cssClass changeslist damaging likelygood priority subset conflicts defaultHighlightColor maybebad label ores rcfilters damaging maybebad label ores rcfilters damaging maybebad desc cssClass changeslist damaging maybebad priority subset damaging likelybad damaging verylikelybad conflicts defaultHighlightColor likelybad label ores rcfilters damaging likelybad label ores rcfilters damaging likelybad desc low cssClass changeslist damaging likelybad priority subset damaging verylikelybad conflicts defaultHighlightColor verylikelybad label ores rcfilters damaging verylikelybad label ores rcfilters damaging verylikelybad desc cssClass changeslist damaging verylikelybad priority subset conflicts defaultHighlightColor priority conflicts changeType hidelog globalDescription ores rcfilters ores conflicts logactions contextDescription ores rcfilters damaging conflicts logactions changeType hideWikibase globalDescription rcfilters hide conflicts ores contextDescription rcfilters damaging conflicts hide whatsThisHeader ores rcfilters damaging whats whatsThisBody ores rcfilters damaging whats whatsThisUrl Special MyLanguage Help New filters review Quality Intent Filters whatsThisLinkText ores rcfilters whats ores rcfilters damaging separator default goodfaith string fullCoverage filters likelygood label ores rcfilters goodfaith good label ores rcfilters goodfaith good desc cssClass changeslist goodfaith good priority subset conflicts defaultHighlightColor maybebad label ores rcfilters goodfaith maybebad label ores rcfilters goodfaith maybebad desc cssClass changeslist goodfaith maybebad priority subset goodfaith likelybad goodfaith verylikelybad conflicts defaultHighlightColor likelybad label ores rcfilters goodfaith bad label ores rcfilters goodfaith bad desc low cssClass changeslist goodfaith bad priority subset goodfaith verylikelybad conflicts defaultHighlightColor verylikelybad label ores rcfilters goodfaith verylikelybad label ores rcfilters goodfaith verylikelybad desc cssClass changeslist goodfaith verylikelybad priority subset conflicts defaultHighlightColor priority conflicts changeType hidelog globalDescription ores rcfilters ores conflicts logactions contextDescription ores rcfilters goodfaith conflicts logactions changeType hideWikibase globalDescription rcfilters hide conflicts ores contextDescription rcfilters goodfaith conflicts hide whatsThisHeader ores rcfilters goodfaith whats whatsThisBody ores rcfilters goodfaith whats whatsThisUrl Special MyLanguage Help New filters review Quality Intent Filters whatsThisLinkText ores rcfilters whats ores rcfilters goodfaith separator default userExpLevel string fullCoverage filters unregistered label rcfilters experience level unregistered label rcfilters experience level unregistered cssClass changeslist unregistered priority subset conflicts defaultHighlightColor label rcfilters experience level label rcfilters experience level cssClass changeslist priority subset userExpLevel newcomer userExpLevel learner userExpLevel experienced conflicts defaultHighlightColor newcomer label rcfilters experience level newcomer label rcfilters experience level newcomer cssClass changeslist newcomer priority subset conflicts defaultHighlightColor learner label rcfilters experience level learner label rcfilters experience level learner cssClass changeslist learner priority subset conflicts defaultHighlightColor experienced label rcfilters experience level experienced label rcfilters experience level experienced fr janvier février mars avril mai juin juillet aot septembre octobre novembre décembre janv fév mars avr mai juin juill aot sept oct nov déc ')
 Excl.add_to_exclusion_list(r'Mga Mga bag Lint errors Mga redirect nga Mga redirect nga not connected fewest revisions without language Protected Protected titles Uncategorized Disambiguation Entity linking disambiguation topics near property badges Tracking Login create account account rename request Login unification status Users Active users Autoblocks Blocked users Bot passwords credentials remove email address account manager accounts management Grants Mga Password policies Remove credentials Reset password Recent changes logs Valid change reports uploads File nga Search duplicate N L w D')
-Excl.add_to_exclusion_list(r'januar februar marts april maj juni juli august september oktober november december jan feb mar apr maj jun jul aug sep okt nov dec Ma Ti On Fr Lø Sø januar februar marts april maj juni juli august september oktober november december jan feb mar apr maj jun jul aug sep okt nov dec maj XNyPagpAICMAACQZ kAAABE lat lon emfh redirect NewSection ')
+Excl.add_to_exclusion_list(r'januar februar marts april maj juni juli august september oktober november december jan feb mar apr maj jun jul aug sep okt nov dec Ma Ti On Fr Lø Sø januar februar marts april maj juni juli august september oktober november december jan feb mar apr maj jun jul aug sep okt nov dec maj lat lon emfh redirect NewSection ')
 Excl.add_to_exclusion_list(r' OpenStreetMapFrame  ArchiveLinks MonobookToolbarStandard Wdsearch Cp empty SimilarTitles PDCStriker TMHGalleryHook HiddenCat ExternalSearch Form')
 Excl.add_to_exclusion_list(r'Janewoore Febrewoore Marts Jüüne Jüüle Oktoober Nofember Detsember Nof Det gennaio febbraio marzo aprile maggio giugno luglio agosto settembre ottobre dicembre gen mag giu lug ott nomobile Cspan')
 Excl.add_to_exclusion_list(r'Eneru Pebreru Marsu Abril Mayu Juniu Juliu Agostu Setyembri Oktubri Nobyembri Disyembri Ene Peb Mrs Abr Myu Hnu Hul Ago Set Nob Dis ')
@@ -254,6 +254,9 @@ class TaskManager:
             return async_result
         return None
 
+    def count(self):
+        return len(self.tasks)
+
 class Crawler():
 
     re_valid_url = re.compile(r'\bhttps\:\/\/(www\.){0,1}(en|simple|de|es|bs|da|ms|fi|fr|it|pam|af|frr|nl|ceb|war|eu)\.wikipedia\.org')
@@ -262,7 +265,8 @@ class Crawler():
     anim = "/–\\|"
     anim_calls = 0
 
-    def __init__(self, write_html_to='CrawledPages.csv', state_file='Crawler.state', maxPages=10000, resume=False, minMaxLen=(3000, 4000)):
+    def __init__(self, write_html_to='CrawledPages.csv', state_file='Crawler.state', maxPages=10000, resume=False, minMaxLen=(3000, 4000), num_workers=0):
+        self.main = False
         self.pagesVisited = []
         self.write_to = write_html_to
         self.state_file = state_file
@@ -271,6 +275,7 @@ class Crawler():
         self.keyboard_interrupt = False
         self.trash_pages = set([])
         self.minMaxLen = minMaxLen
+        self.num_workers = num_workers
 
         try:
             with open(state_file, 'rb') as file:
@@ -298,21 +303,23 @@ class Crawler():
             print('A csv has not yet been created. Did not load visited pages from: ', self.write_to, e)
         print('Crawler visited ', len(self.pagesVisited), 'pages')
 
+        os_cpu_count = os.cpu_count()
+        if (self.num_workers == 0): self.num_workers = 2
+        if (self.num_workers >= os_cpu_count - 1): self.num_workers = os_cpu_count - 1
+        if (self.num_workers <= 0): self.num_workers = 1
+        self.max_tasks = ceil(self.num_workers * 1.25) + 2
+
     def ignore_page(self, url):
         return url is None or (url in self.pagesVisited) or (url in self.trash_pages) or Crawler.re_valid_url.match(url) is None or not Crawler.re_is_not_article.search(url) is None
 
     '''
     Start crawling wikipedia. Exit with CTRL+C (for Linux and Windows).
     '''
-    def crawl(self, maxPages=None, write_html_to=None, num_workers=0):
-        os_cpu_count = os.cpu_count()
-        if (num_workers == 0): num_workers = 2
-        if (num_workers >= os_cpu_count - 1): num_workers = os_cpu_count - 1
-        if (num_workers <= 0): num_workers = 1
-        max_tasks = ceil(num_workers * 1.25) + 2
-        tasks = TaskManager(max_tasks=max_tasks, workers=num_workers)
+    def crawl(self, maxPages=None, write_html_to=None):
 
-        self.cprint(custom='Using ' + str(num_workers) + ' workers querying up to ' + str(max_tasks) + ' tasks', end='\n')
+        self.tasks = TaskManager(max_tasks=self.max_tasks, workers=self.num_workers)
+        self.main = True
+        self.cprint(custom='Using ' + str(self.num_workers) + ' workers queuing up to ' + str(self.max_tasks) + ' tasks', end='\n')
 
         if (write_html_to is None):
             write_html_to = self.write_to
@@ -322,24 +329,23 @@ class Crawler():
         csvAppender = CsvAppender(write_html_to, self.minMaxLen)
         do_save_state = 0
 
-        while (not tasks.empty() or (len(self.pagesToVisit) > 0 and not self.keyboard_interrupt)):
+        while (not self.tasks.empty() or (len(self.pagesToVisit) > 0 and not self.keyboard_interrupt)):
             try:
                 # push next url if pending results list is free
-                if (not self.keyboard_interrupt and not tasks.full() and len(self.pagesToVisit) > 0):
+                if (not self.keyboard_interrupt and not self.tasks.full() and len(self.pagesToVisit) > 0):
                     Crawler.animate_work(True)
                     url = self.pagesToVisit[0]
                     self.pagesToVisit = self.pagesToVisit[1:]
-                    tasks.put(parse_url, WorkerArgs(url, self.ignore_page(url)))
+                    self.tasks.put(parse_url, WorkerArgs(url, self.ignore_page(url)))
 
                 Crawler.animate_work(True)
                 if (self.keyboard_interrupt):
                     self.cprint(custom='')
 
                 # pull a result if tasks not empty and a task is ready
-                if (not tasks.empty() and tasks.any_ready()):
-                    async_result = tasks.get_ready_task()
+                if (not self.tasks.empty() and self.tasks.any_ready()):
                     try:
-                        url, innerText, links = async_result.get()
+                        url, innerText, links = self.tasks.get_ready_task().get()
                     except Exception as e:
                         self.cprint(error=e, url=url, end='\n')
                         continue
@@ -385,8 +391,7 @@ class Crawler():
                     Crawler.animate_work(True)
         
             except KeyboardInterrupt as ki:
-                self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
-                self.keyboard_interrupt = True
+                self.handle_keyboard_interrupt()
 
         # save state before exiting
         self.saveState()
@@ -471,7 +476,7 @@ class Crawler():
     '''
     Creates and animation like {/} > {–} > {\} > {|}
     '''
-    def animate_work(force=False, times=1, delay=.14):
+    def animate_work(force=False, times=1, delay=.14, empty=False):
         Crawler.anim_calls = (Crawler.anim_calls + 1) % 50
         newAnim = Crawler.anim_calls is 0
         for i in range(times):
@@ -479,7 +484,12 @@ class Crawler():
                 if (delay > .09):
                     time.sleep(delay)
                 Crawler.anim_idx += 1
-            print_string = ' {' + Crawler.anim[Crawler.anim_idx % len(Crawler.anim)] + '}'
+            print_string = '{'
+            if (empty):
+                print_string += ' '
+            else:
+                print_string += Crawler.anim[Crawler.anim_idx % len(Crawler.anim)]
+            print_string += '}'
             if (newAnim or force):
                 print(print_string, end='\r', flush=True)
                 # print(print_string, end='\r', flush=True)
@@ -500,34 +510,40 @@ class Crawler():
         'Page  IGNORED', # 5
         'Crawl STOP   ', # 6
         'State SAVE   ', # 7
-        '(waiting for tasks to finish)', # 8
+        'waiting for tasks to finish', # 8
     ]
 
-    def handle_keyboard_interrupt(self, sig, frame):
-        self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
+    def handle_keyboard_interrupt(self, sig=None, frame=None):
         self.keyboard_interrupt = True
+        self.cprint(error='KeyboardInterrupt', steps=[6, 7], end='\n')
 
-    def cprint(self, steps=None, url=None, error=None, end=None, flush=True, custom=None):
+    def cprint(self, steps=[], url=None, error=None, end='\r', flush=True, custom=''):
+        if (not self.main):
+            return 0
+            
         print('\r', end='\r')
         
         print_string = ''
+        work_anim = Crawler.animate_work(empty=( (5 in steps) or ('\n' in end) or ('\n' in custom) ))
 
-        if (not custom is None):
-            print_string += Crawler.animate_work() + ' '
+        kb_interrupt_message = ' (' + Crawler.STEP_MESSAGES[8] + ' : ' + str(self.tasks.count()) + ' remaining ) '
+
+        if (len(custom) > 0):
+            print_string += work_anim + ' '
             if (self.keyboard_interrupt):
-                print_string += ' ' + Crawler.STEP_MESSAGES[8] + ' '
+                print_string += kb_interrupt_message + ' '
             if (not custom is None and not custom == ''):
                 print_string += ' - ' + custom
         else:
             if (not error is None):
                 print_string = str(error) + ': '
             else:
-                print_string = Crawler.animate_work() + ' '
+                print_string = work_anim + ' '
                 print_string += str(len(self.pagesVisited) + 1).rjust(5) + ' - '
                 if (self.keyboard_interrupt):
-                    print_string += ' ' + Crawler.STEP_MESSAGES[8] + ' - '
+                    print_string += kb_interrupt_message + '- '
 
-        if (not steps is None):
+        if (len(steps) > 0):
             for s in steps:
                 print_string += Crawler.STEP_MESSAGES[s] + ' & '
             print_string = print_string[:-2]
@@ -543,7 +559,7 @@ class Crawler():
         cols, lines = shutil.get_terminal_size(fallback=(79, 23))
         print_string = print_string.ljust(cols-3)[:cols-3] + '...'
 
-        print(print_string, end=end or '\r', flush=flush)
+        print(print_string, end=end, flush=flush)
 
         return print_string
 
@@ -554,7 +570,7 @@ to_csv='Random_Wiki_Pages_2.csv'
 # except:
 #     print('error while cleaning csv')
 
-crawler = Crawler(resume=False, write_html_to=to_csv)
+crawler = Crawler(resume=False, write_html_to=to_csv, num_workers=1)
 
 def signal_handler(sig, frame):
         crawler.handle_keyboard_interrupt(sig, frame)
@@ -579,4 +595,4 @@ crawler.appendUrl('https://nl.wikipedia.org/wiki/Hoofdpagina')
 crawler.appendUrl('https://it.wikipedia.org/wiki/Pagina_principale')
 crawler.appendUrl('https://ms.wikipedia.org/wiki/Laman_Utama')
 crawler.appendUrl('https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal')
-crawler.crawl(num_workers=5)
+crawler.crawl()
