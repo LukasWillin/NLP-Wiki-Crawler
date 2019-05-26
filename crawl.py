@@ -570,7 +570,7 @@ to_csv='Random_Wiki_Pages_2.csv'
 # except:
 #     print('error while cleaning csv')
 
-crawler = Crawler(resume=False, write_html_to=to_csv, num_workers=1)
+crawler = Crawler(resume=False, write_html_to=to_csv, num_workers=4)
 
 def signal_handler(sig, frame):
         crawler.handle_keyboard_interrupt(sig, frame)
